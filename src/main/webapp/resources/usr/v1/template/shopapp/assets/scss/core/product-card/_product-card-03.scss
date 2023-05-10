@@ -1,0 +1,104 @@
+/* Product Card 3
+-------------------------------------------*/
+.product-card-3 {
+	position: relative;
+	background: var(--#{$prefix}white);
+	.badge-ribbon {
+		position: absolute;
+		top: 15px;
+		left: 0;
+		z-index: 1;
+	}
+	.product-media {
+		overflow: hidden;
+		position: relative;
+		img {
+			transform: scale(1);
+			transition: ease all 0.35s;
+			width: 100%;
+		}
+	}
+	.product-action {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		display: flex;
+		flex-direction: column;
+		z-index: 1;
+		.btn {
+			padding: 0;
+			width: 35px;
+			height: 35px;
+			border-radius: 3px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1;
+			margin-bottom: 10px;
+			transition: ease-in opacity 0.30s, ease-in left 0.30s;
+			position: relative;
+			left: -20px;
+			opacity: 0;
+			@include media-breakpoint-down(sm) {
+				width: 30px;
+				height: 30px;
+				margin-bottom: 5px;
+			}
+			+ .btn {
+				transition-delay: 0.15s;
+				+ .btn {
+					transition-delay: 0.20s;
+					+ .btn {
+						transition-delay: 0.25s;
+						+ .btn {
+							transition-delay: 0.30s;
+						}
+					}
+				}
+			}
+			&:hover {
+				background: var(--#{$prefix}primary);
+				border-color: var(--#{$prefix}primary);
+			}
+		}
+	}
+
+	.product-card-info {
+		position: relative;
+		padding: 10px 15px 0;
+		text-align: center;
+	}
+	.product-title {
+		font-weight: 600;
+		margin: 0 0 6px;
+		a {
+			color: var(--#{$prefix}dark);
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-price {
+		span {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		del {
+			font-size: 14px;
+		}
+	}
+
+	&:hover {
+		.product-media {
+			img {
+				transform: scale(1.1);
+			}
+		}
+		.product-action {
+			.btn {
+				left: 0;
+				opacity: 1;
+			}
+		}
+	}
+}

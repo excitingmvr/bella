@@ -1,0 +1,96 @@
+@import '../vendor/bootstrap/scss/functions';
+
+// Custom setup
+@import 'core/swimwear/variables';
+
+// Theme
+@import "core/variables";
+@import "core/components/utilitie";
+
+// Fonts
+@import "core/fonts";
+
+
+// Bootstrap core
+@import '../vendor/bootstrap/scss/bootstrap';
+
+// Custom Fonts
+@import "../fonts/butler/butler.css";
+
+// Vendor
+@import "../vendor/bootstrap/icons/bootstrap-icons.css";
+@import "../vendor/magnific/magnific-popup.css";
+@import "../vendor/swiper/swiper-bundle.min.css";
+@import "../vendor/feather/feather.css";
+
+// Header
+@import "core/header/header";
+
+
+// Footer
+@import "core/footer/footer";
+
+
+
+// Base
+@import "core/components/wrapper";
+@import "core/components/spinner";
+@import "core/components/icon";
+@import "core/components/section";
+@import "core/components/article";
+@import "core/components/avatar";
+@import "core/components/dropdown";
+@import "core/components/link";
+@import "core/components/color";
+@import "core/components/background";
+@import "core/components/swiper";
+@import "core/components/form";
+@import "core/components/count-down";
+@import "core/components/my-account";
+@import "core/components/list";
+@import "core/components/hover";
+@import "core/components/titles";
+@import "core/components/tab";
+@import "core/components/img";
+@import "core/components/table";
+@import "core/components/device";
+@import "core/components/breadcrumb";
+@import "core/components/container";
+@import "core/components/rating-star";
+@import "core/components/scroll";
+
+
+
+// Product Card 
+@import "core/product-card/product-card-01";
+@import "core/product-card/product-card-02";
+@import "core/product-card/product-card-03";
+@import "core/product-card/product-card-04";
+@import "core/product-card/product-card-05";
+@import "core/product-card/product-card-06";
+@import "core/product-card/product-card-07";
+@import "core/product-card/product-card-08";
+@import "core/product-card/product-card-09";
+@import "core/product-card/product-card-10";
+
+//Category Card
+@import "core/category-card/category-card-01";
+
+// Shop 
+@import "core/shop/shop-clear-filter-01";
+@import "core/shop/shop";
+@import "core/shop/shop-02";
+@import "core/shop/shop-03";
+@import "core/shop/shop-04";
+
+
+// Product Detail 
+@import "core/product-detail/product-detail";
+@import "core/product-detail/product-detail-02";
+@import "core/product-detail/product-detail-03";
+
+
+
+
+// Custom styles (User's file)
+@import "core/custom/styles";

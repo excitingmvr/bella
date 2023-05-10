@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Base">
+
+	<sql id="selectListUpperForMysql">
+		select aa.* from (
+	</sql>
+	
+	
+	<sql id="selectListLowerForMysql">	
+		) aa
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</sql>
+	
+	
+	<sql id="orderByLimitForMysql">	
+		limit 99999999999
+	</sql>
+	
+	
+	<sql id="selectListUpperForOracle">
+		SELECT BB.*
+			FROM
+			(SELECT ROWNUM as RNUM, AA.*
+				FROM (
+	</sql>
+	
+	
+	<sql id="selectListLowerForOracle">	
+			) AA
+			WHERE ROWNUM <![CDATA[ < ]]>= #{endRnum} ) BB
+		WHERE BB.RNUM >= #{startRnum}
+	</sql>
+	
+	
+	<sql id="insertRegModColumn">	
+		,regIp
+		,regSeq
+		,regDeviceCd
+		,regDateTime
+		,regDateTimeSvr
+		,modIp
+		,modSeq
+		,modDeviceCd
+		,modDateTime
+		,modDateTimeSvr
+	</sql>
+    
+    
+    <sql id="insertRegModValue">	
+		,#{regIp}
+		,#{regSeq}
+		,#{regDeviceCd}
+		,#{regDateTime}
+		,#{regDateTimeSvr}
+		,#{modIp}
+		,#{modSeq}
+		,#{modDeviceCd}
+		,#{modDateTime}
+		,#{modDateTimeSvr}
+	</sql>
+	
+	
+	<sql id="insertRegColumn">	
+		,regIp
+		,regSeq
+		,regDeviceCd
+		,regDateTime
+		,regDateTimeSvr
+	</sql>
+    
+    
+    <sql id="insertRegValue">	
+		,#{regIp}
+		,#{regSeq}
+		,#{regDeviceCd}
+		,#{regDateTime}
+		,#{regDateTimeSvr}
+	</sql>
+	
+	
+	<sql id="updateModColumnValue">	
+		,modIp = #{modIp}
+		,modSeq = #{modSeq}
+		,modDeviceCd = #{modDeviceCd}
+		,modDateTime = #{modDateTime}
+		,modDateTimeSvr = #{modDateTimeSvr}
+	</sql>
+	
+	
+	<sql id="selectRegMod">	
+		,regIp
+		,regSeq
+		,regDeviceCd
+		,regDateTime
+		,regDateTimeSvr
+		,modIp
+		,modSeq
+		,modDeviceCd
+		,modDateTime
+		,modDateTimeSvr
+	</sql>
+	
+	
+	<sql id="selectRegModWithAlies">	
+		,a.regIp
+		,a.regSeq
+		,(select ifmmId from infrMember where ifmmSeq = a.regSeq) as regId
+		,a.regDeviceCd
+		,a.regDateTime
+		,a.regDateTimeSvr
+		,a.modIp
+		,a.modSeq
+		,(select ifmmId from infrMember where ifmmSeq = a.modSeq) as modId
+		,a.modDeviceCd
+		,a.modDateTime
+		,a.modDateTimeSvr
+	</sql>
+	
+	
+	<!-- uploaded s -->
+	<insert id="insertUploaded">
+		INSERT INTO ${tableName} (
+			type
+			,defaultNy
+			,sort
+			,path
+			,originalName
+			,uuidName
+			,ext
+			,size
+			,delNy
+			<include refid="Base.insertRegColumn" />
+			,pseq
+		) values (
+			#{type}
+			,#{defaultNy}
+			,#{sort}
+			,#{path}
+			,#{originalName}
+			,#{uuidName}
+			,#{ext}
+			,#{size}
+			,0
+			<include refid="Base.insertRegValue" />
+			,#{pseq}
+		)
+	</insert>
+	
+	
+	<delete id="deleteUploaded">
+		DELETE FROM ${tableName}
+		WHERE 1=1
+			AND seq = #{seq}
+	</delete>
+	
+	
+	<update id="ueleteUploaded">
+		UPDATE ${tableName} SET delNy = 1
+		WHERE 1=1
+			AND seq = #{seq}
+	</update>
+	<!-- uploaded e -->	
+
+</mapper>
+
+

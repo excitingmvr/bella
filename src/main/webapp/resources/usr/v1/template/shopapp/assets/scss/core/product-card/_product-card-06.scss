@@ -1,0 +1,113 @@
+/* Product Card 6
+-------------------------------------------*/
+.product-card-6 {
+	.product-card-image {
+		position: relative;
+	}
+	.badge-ribbon {
+		position: absolute;
+		top: 10px;
+		left: 0;
+		z-index: 1;
+	}
+	.product-action {
+		position: absolute;
+	    display: flex;
+	    left: 20px;
+	    right: 20px;
+	    bottom: 20px;
+	    z-index: 2;
+	    .btn {
+    	    padding: 0;
+		    flex: 1;
+		    border: none;
+		    line-height: 45px;
+		    font-size: 18px;
+		    color: $black;
+		    background: var(--#{$prefix}white);
+		    border-radius: 0;
+		    @include media-breakpoint-down(sm) {
+		    	line-height: 35px;
+		    	font-size: 14px;
+		    }
+		    &:first-child {
+		    	border-top-left-radius: 5px;
+		    	border-bottom-left-radius: 5px;
+		    }
+		    &:last-child {
+		    	border-top-right-radius: 5px;
+		    	border-bottom-right-radius: 5px;
+		    }
+		    + .btn {
+		    	border-left: 1px solid var(--#{$prefix}gray-300);
+		    }
+		    &:hover {
+		    	background: $black;
+		    	color: var(--#{$prefix}white);
+		    }
+	    }
+	}
+	.product-media {
+		overflow: hidden;
+		border-radius: 5px;
+		img {
+			transition: transform 1.1s cubic-bezier(.15,.75,.5,1) 0s;
+			transform: translateZ(0);
+		}
+	}
+
+	.product-card-info {
+		padding-top: 15px;
+	}
+
+	.product-meta {
+	    line-height: normal;
+		margin-bottom: 2px;
+		a {
+			color: var(--#{$prefix}body-color);
+			font-size: 11px;
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-title {
+		font-weight: 600;
+		margin: 0 0 6px;
+		a {
+			color: var(--#{$prefix}dark);
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-price {
+		span {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		del {
+			font-size: 14px;
+		}
+	}
+	.rating-star {
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
+	.nav-thumbs {
+		padding-top: 10px;
+    	font-size: 0px;
+		.form-check {
+			margin: 0 6px 0 0;
+	    	min-height: inherit;
+		}
+	}
+
+	&:hover {
+		.product-media {
+			img {
+				transform: scale3d(1.1,1.1,1.1) translateZ(0);
+			}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+.shop-clear-filter-01 {
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+    max-width: 100%;
+    overflow-x: auto;
+	ul {
+		display: flex;
+		margin: 0;
+		padding: 0;
+		li {
+			+ li {
+				margin-left: 10px;
+			}
+		}
+	}
+	a {
+		display: inline-block;
+	    vertical-align: top;
+	    padding: 2px 8px;
+	    border: 1px solid var(--#{$prefix}gray-300);
+	    color: var(--#{$prefix}dark);
+	    transition: ease all 0.35s;
+        display: flex;
+		align-items: center;
+		white-space: nowrap;
+	    &:hover {
+	    	background: var(--#{$prefix}primary);
+	    	border-color: var(--#{$prefix}primary);
+	    	color: var(--#{$prefix}white);
+	    }
+	    &.clear-all {
+	    	background: var(--#{$prefix}danger);
+	    	border-color: var(--#{$prefix}danger);
+	    	color: var(--#{$prefix}white);
+	    	&:hover {
+	    		background: var(--#{$prefix}dark);
+	    	border-color: var(--#{$prefix}dark);
+	    	}
+	    }
+	}
+}

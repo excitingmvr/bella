@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.code.CodeMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.code.Code"></resultMap>
+	
+	<sql id ="selectCommon">
+		FROM infrCode a
+			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
+		WHERE 1=1
+			<if test="shUseNy != null and !shUseNy.equals('')">AND ifcdUseNy = #{shUseNy}</if>
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifcdDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOption == 1">AND a.ifcgSeq = #{shValue}</when>
+				<when test="shOption == 2">AND b.ifcgName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND a.ifcdSeq = #{shValue}</when>
+				<when test="shOption == 4">AND a.ifcdSeqAnother = #{shValue}</when>
+				<when test="shOption == 5">AND a.ifcdName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 6">AND a.ifcdNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />	
+			SELECT
+				a.ifcgSeq
+			    , b.ifcgName
+				, a.ifcdSeq
+				, a.ifcdSeqAnother
+				, a.ifcdName
+				, a.ifcdNameEng
+				, a.ifcdUseNy
+				, a.ifcdOrder
+				<include refid="Base.selectRegModWithAlies" />
+			<include refid="selectCommon" />
+			ORDER BY a.ifcgSeq, a.ifcdOrder, a.ifcdSeq
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+			a.*
+			<include refid="Base.selectRegModWithAlies" />
+			,b.ifcgName
+		FROM infrCode a
+			LEFT JOIN infrCodeGroup b on b.ifcgSeq = a.ifcgSeq
+		WHERE 1=1
+			AND a.ifcdSeq = #{ifcdSeq}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO infrCode (
+			ifcdSeqAnother
+			,ifcdName
+			,ifcdNameEng
+			,ifcdNameLang1
+			,ifcdNameLang2
+			,ifcdNameLang3
+			,ifcdNameLang4
+			,ifcdNameLang5
+			,ifcdNameLang6
+			,ifcdUseNy
+			,ifcdOrder
+			,ifcdReferenceV1
+			,ifcdReferenceV2
+			,ifcdReferenceV3
+			,ifcdReferenceV4
+			,ifcdReferenceI1
+			,ifcdReferenceI2
+			,ifcdReferenceI3
+			,ifcdReferenceI4
+			,ifcdDesc
+			,ifcdDelNy
+			<include refid="Base.insertRegModColumn" />
+			,ifcgSeq
+		)
+		VALUES (
+			#{ifcdSeqAnother}
+			,#{ifcdName}
+			,#{ifcdNameEng}
+			,#{ifcdNameLang1}
+			,#{ifcdNameLang2}
+			,#{ifcdNameLang3}
+			,#{ifcdNameLang4}
+			,#{ifcdNameLang5}
+			,#{ifcdNameLang6}
+			,#{ifcdUseNy}
+			,#{ifcdOrder}
+			,#{ifcdReferenceV1}
+			,#{ifcdReferenceV2}
+			,#{ifcdReferenceV3}
+			,#{ifcdReferenceV4}
+			,#{ifcdReferenceI1}
+			,#{ifcdReferenceI2}
+			,#{ifcdReferenceI3}
+			,#{ifcdReferenceI4}
+			,#{ifcdDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{ifcgSeq}
+		)
+		<selectKey resultType="String" keyProperty="ifcdSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE infrCode
+		SET
+			ifcdSeqAnother = #{ifcdSeqAnother}
+			,ifcdName = #{ifcdName}
+			,ifcdNameEng = #{ifcdNameEng}
+			,ifcdNameLang1 = #{ifcdNameLang1}
+			,ifcdNameLang2 = #{ifcdNameLang2}
+			,ifcdNameLang3 = #{ifcdNameLang3}
+			,ifcdNameLang4 = #{ifcdNameLang4}
+			,ifcdNameLang5 = #{ifcdNameLang5}
+			,ifcdNameLang6 = #{ifcdNameLang6}
+			,ifcdUseNy = #{ifcdUseNy}
+			,ifcdOrder = #{ifcdOrder}
+			,ifcdReferenceV1 = #{ifcdReferenceV1}
+			,ifcdReferenceV2 = #{ifcdReferenceV2}
+			,ifcdReferenceV3 = #{ifcdReferenceV3}
+			,ifcdReferenceV4 = #{ifcdReferenceV4}
+			,ifcdReferenceI1 = #{ifcdReferenceI1}
+			,ifcdReferenceI2 = #{ifcdReferenceI2}
+			,ifcdReferenceI3 = #{ifcdReferenceI3}
+			,ifcdReferenceI4 = #{ifcdReferenceI4}
+			,ifcdDesc = #{ifcdDesc}
+			<include refid="Base.updateModColumnValue" />
+			,ifcgSeq = #{ifcgSeq}
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}		
+	</update>
+	
+	<update id="uelete">
+		UPDATE infrCode
+		SET
+			ifcdDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM infrCode
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
+	</delete>
+	
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			ifcdSeq
+			, ifcdName
+			, ifcgSeq
+		FROM
+			infrCode
+		WHERE 1=1
+			AND ifcdDelNy = 0
+		    AND ifcdUseNy = 1
+    </select>
+</mapper>
+
+
+

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.category.CategoryMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.category.Category"></resultMap>
+	
+	<sql id ="selectCommon">
+		FROM 
+			infrCategory a
+		WHERE 1=1
+			<if test="shUseNy != null and !shUseNy.equals('')">AND ifnaUseNy = #{shUseNy}</if>
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifnaDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND ifnaName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND ifnaNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND ifnaCode2Char LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND ifnaCode3Char LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.ifctSeq
+				,a.ifctName
+				,a.ifctNameEng
+				,a.ifctParents
+				,a.ifctDepth
+				,a.ifctUseNy
+				,a.ifctOrder
+				,a.ifctDesc
+				,a.ifctDelNy
+		<include refid="Base.selectRegModWithAlies" />
+		<include refid="selectCommon" />
+			ORDER BY a.ifctSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ifctSeq
+			,a.ifctName
+			,a.ifctNameEng
+			,a.ifctParents
+			,a.ifctDepth
+			,a.ifctUseNy
+			,a.ifctOrder
+			,a.ifctDesc
+			,a.ifctDelNy
+			<include refid="Base.selectRegModWithAlies" />
+		FROM
+			infrCategory a
+		WHERE 1=1
+			AND a.ifctSeq = #{ifctSeq}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO infrCategory (
+			ifctName
+			,ifctNameEng
+			,ifctParents
+			,ifctDepth
+			,ifctUseNy
+			,ifctOrder
+			,ifctDesc
+			,ifctDelNy
+			<include refid="Base.insertRegModColumn" />
+		)
+		VALUES (
+			#{ifctName}
+			,#{ifctNameEng}
+			,#{ifctParents}
+			,#{ifctDepth}
+			,#{ifctUseNy}
+			,#{ifctOrder}
+			,#{ifctDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifctSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="update">
+		UPDATE infrCategory
+		SET
+			ifctName = #{ifctName}
+			,ifctNameEng = #{ifctNameEng}
+			,ifctParents = #{ifctParents}
+			,ifctDepth = #{ifctDepth}
+			,ifctUseNy = #{ifctUseNy}
+			,ifctOrder = #{ifctOrder}
+			,ifctDesc = #{ifctDesc}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifctSeq = #{ifctSeq}
+	</update>
+	
+	
+	<update id="uelete">
+		UPDATE infrCategory
+		SET
+			ifctDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifctSeq = #{ifctSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrCategory
+		WHERE 1=1
+			AND ifctSeq = #{ifctSeq}
+	</delete>
+
+
+    <select id="selectListCachedCategoryArrayList" resultMap="resultMapObj">
+		SELECT 
+			a.ifctSeq
+			,a.ifctName
+			,a.ifctNameEng
+			,a.ifctParents
+			,a.ifctDepth
+			,a.ifctOrder
+		FROM
+			infrCategory a
+		WHERE 1=1
+			AND ifctDelNy = 0
+		    AND ifctUseNy = 1
+    </select>
+	
+</mapper>
+
+
+

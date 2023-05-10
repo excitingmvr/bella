@@ -1,0 +1,147 @@
+/* Product Card 1
+-------------------------------------------*/
+.product-card-1 {
+	border: 1px solid var(--#{$prefix}gray-300);
+	position: relative;
+	background: var(--#{$prefix}white);
+	.badge-ribbon {
+		position: absolute;
+		top: 15px;
+		left: 0;
+		z-index: 1;
+		.badge {
+			border-radius: 0;
+		}
+	}
+	.product-card-image {
+		border-bottom: 1px solid var(--#{$prefix}gray-300);
+	}
+	.product-media {
+		overflow: hidden;
+		position: relative;
+		img {
+			transform: scale(1);
+			transition: ease all 0.35s;
+			width: 100%;
+		}
+	}
+	.product-action {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		display: flex;
+		flex-direction: column;
+		transition: ease all 0.35s;
+		z-index: 1;
+		@include media-breakpoint-up(sm) {
+			opacity: 0;
+			right: 25px;
+			top: 15px;
+		}
+		.btn {
+			padding: 0;
+			width: 35px;
+			height: 35px;
+			margin-bottom: 10px;
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1;
+			background: var(--#{$prefix}white);
+			@include media-breakpoint-down(sm) {
+				width: 30px;
+				height: 30px;
+				margin-bottom: 5px;
+			}
+			&:hover {
+				background: var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-cart-btn {
+		position: relative;
+		@include media-breakpoint-up(sm) {
+			position: absolute;
+			bottom: -25%;
+			left: 0;
+			right: 0;
+			transition: ease all 0.35s;
+		}
+		.btn {
+			border-radius: 0;
+		}
+	}
+
+	.product-card-info {
+		position: relative;
+		padding: 8px;
+		text-align: center;
+		@include media-breakpoint-up(sm) {
+			padding: 10px 15px 15px;
+		}
+	}
+	.product-meta {
+	    line-height: normal;
+		margin-bottom: 2px;
+		a {
+			color: var(--#{$prefix}body-color);
+			font-size: 11px;
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-title {
+		font-weight: 600;
+		margin: 0 0 6px;
+		a {
+			color: var(--#{$prefix}dark);
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-price {
+		span {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		del {
+			font-size: 14px;
+		}
+	}
+	.rating-star {
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
+	.form-check {
+		margin: 0 2px;
+	}
+	.nav-thumbs {
+		padding-top: 10px;
+		@include media-breakpoint-down(sm) {
+		    display: flex;
+		    flex-wrap: nowrap;
+		    max-width: 100%;
+		    overflow-x: auto;
+		}
+	}
+	&:hover {
+		box-shadow: $box-shadow;
+		.product-media {
+			img {
+				transform: scale(1.1);
+			}
+		}
+		@include media-breakpoint-up(sm) {
+			.product-action {
+				opacity: 1;
+				right: 15px;
+			}
+		}
+		.product-cart-btn {
+			bottom: 0;
+		}
+	}
+}

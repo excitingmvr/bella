@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.notice.NoticeMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.notice.Notice"></resultMap>
+	
+	<sql id ="selectCommon">
+		FROM 
+			infrNotice a
+		WHERE 1=1
+			AND ifntDisplayNy = 1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifntDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.ifntSeq
+				,a.ifntTitle
+				,a.ifntContents
+				,a.ifntTopNy
+				,a.ifntTopOrder
+				,a.ifntTopDateStart
+				,a.ifntTopDateEnd
+				,a.ifntDisplayNy
+				,a.ifntDelNy
+		<include refid="Base.selectRegModWithAlies" />
+		<include refid="selectCommon" />
+			ORDER BY a.ifntSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ifntSeq
+			,a.ifntTitle
+			,a.ifntContents
+			,a.ifntTopNy
+			,a.ifntTopOrder
+			,a.ifntTopDateStart
+			,a.ifntTopDateEnd
+			,a.ifntDisplayNy
+			,a.ifntDelNy
+			<include refid="Base.selectRegModWithAlies" />
+		FROM
+			infrNotice a
+		WHERE 1=1
+			AND a.ifntSeq = #{ifntSeq}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO infrNotice (
+			ifntTitle
+			,ifntContents
+			,ifntTopNy
+			,ifntTopOrder
+			,ifntTopDateStart
+			,ifntTopDateEnd
+			,ifntDisplayNy
+			,ifntDelNy
+			<include refid="Base.insertRegModColumn" />
+		)
+		VALUES (
+			#{ifntTitle}
+			,#{ifntContents}
+			,#{ifntTopNy}
+			,#{ifntTopOrder}
+			,#{ifntTopDateStart}
+			,#{ifntTopDateEnd}
+			,#{ifntDisplayNy}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifntSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="update">
+		UPDATE infrNotice
+		SET
+			ifntTitle = #{ifntTitle}
+			,ifntContents = #{ifntContents}
+			,ifntTopNy = #{ifntTopNy}
+			,ifntTopOrder = #{ifntTopOrder}
+			,ifntTopDateStart = #{ifntTopDateStart}
+			,ifntTopDateEnd = #{ifntTopDateEnd}
+			,ifntDisplayNy = #{ifntDisplayNy}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifntSeq = #{ifntSeq}
+	</update>
+	
+	
+	<update id="uelete">
+		UPDATE infrNotice
+		SET
+			ifntDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifntSeq = #{ifntSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrNotice
+		WHERE 1=1
+			AND ifntSeq = #{ifntSeq}
+	</delete>
+
+	
+</mapper>
+
+
+

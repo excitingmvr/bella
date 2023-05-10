@@ -1,0 +1,179 @@
+// Shop sidebar desing
+.shop-sidebar-option-02 {
+	flex: 0 0 300px;
+	max-width: 300px;
+    .shop-categories-list {
+        border-top: 1px solid var(--#{$prefix}gray-300);
+
+        .nav {
+            .nav {
+                padding-left: 15px;
+                margin-bottom: 10px;
+                border-left: 1px dashed var(--#{$prefix}gray-300);
+                .nav-link {
+                    color: var(--#{$prefix}body-color);
+                    font-weight: 400;
+                    font-size: 15px;
+
+                    &.active,
+                    &:hover {
+                        color: var(--#{$prefix}primary);
+                    }
+                }
+            }
+        }
+
+        .nav-item {
+            position: relative;
+            + .nav-item {
+            	border-top: 1px dashed var(--#{$prefix}gray-300);
+            }
+            .s-icon {
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                top: 5px;
+                right: 0;
+
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    background: var(--#{$prefix}dark);
+                }
+
+                &:before {
+                    width: 2px;
+                    height: 10px;
+                }
+
+                &:after {
+                    width: 10px;
+                    height: 2px;
+                }
+
+                &[aria-expanded="true"] {
+                    &:before {
+                        height: 0;
+                    }
+                }
+            }
+        }
+
+        .nav-link {
+            padding: 8px 30px 8px 25px;
+            color: var(--#{$prefix}dark);
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            &:after {
+            	content: "";
+            	position: absolute;
+            	left: 0;
+            	top: 12px;
+            	width: 16px;
+            	height: 16px;
+            	border: 1px solid $gray-400;
+            	border-radius: 3px;
+            }
+            &:before {
+            	content: "";
+            	width: 0.28rem;
+			    height: 0.5rem;
+			    border-bottom: 1px solid var(--#{$prefix}primary);
+			    border-right: 1px solid var(--#{$prefix}primary);
+			    transform: rotate(45deg);
+			    position: absolute;
+		        top: 15px;
+				left: 6px;
+			    opacity: 0;
+            }
+            span {
+                color: var(--#{$prefix}body-color);
+                font-size: 72%;
+            }
+
+            &.active,
+            &:hover {
+                color: var(--#{$prefix}primary);
+                &:after {
+                	border: 1px solid var(--#{$prefix}primary);
+                }
+                &:before {
+                	opacity: 1;
+                }
+            }
+        }
+    }
+
+    .shop-attributes-box {
+        border: 1px solid var(--#{$prefix}gray-300);
+        margin-bottom: 20px;
+
+        .shop-sidebar-title {
+            a {
+                position: relative;
+                padding: 15px;
+                display: flex;
+                margin: 0;
+                font-size: 15px;
+
+                i {
+                    margin-left: auto;
+                }
+            }
+        }
+
+        .shop-attributes-list {
+            border-top: 1px solid var(--#{$prefix}gray-300);
+        }
+
+        .shop-attr-body {
+            padding: 15px;
+
+            ul {
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+
+
+// Shop top bar desing
+.shop-top-bar-02 {
+	.layout-change {
+		display: flex;
+		.btn {
+			border: 1px solid $gray-400;
+		    padding: 0;
+		    width: 40px;
+		    height: 40px;
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+		    font-size: 18px;
+		    margin-right: 8px;
+		    &.active,
+		    &:hover {
+		    	background: var(--#{$prefix}primary);
+		    	color: var(--#{$prefix}white);
+		    	border-color: var(--#{$prefix}primary);
+		    }
+		}
+	}	
+}
+
+// Shop Bottom Bar Design
+.shop-bottom-bar-02 {
+	.pagination {
+		margin: 0;
+	}
+}

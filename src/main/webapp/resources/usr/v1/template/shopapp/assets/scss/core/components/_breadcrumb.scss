@@ -1,0 +1,18 @@
+.breadcrumb-light {
+	.breadcrumb-item {
+		+ .breadcrumb-item{
+			&:before {
+				color: var(--#{$prefix}white);
+				opacity: 0.8;
+			}
+		}
+		
+		a {
+			color: var(--#{$prefix}white);
+		}
+		&.active {
+			color: var(--#{$prefix}white);	
+		}
+		
+	}
+}

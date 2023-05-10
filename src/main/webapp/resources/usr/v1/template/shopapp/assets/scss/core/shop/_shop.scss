@@ -1,0 +1,136 @@
+.shop-category-list {
+	.nav {
+		.nav {
+			padding-left: 10px;
+			.nav-link {
+				color: var(--#{$prefix}body-color);
+				font-weight: 400;
+				font-size: 15px;
+				&.active,
+				&:hover {
+					color: var(--#{$prefix}primary);
+				}
+			}
+		}
+	}
+	.nav-item {
+		position: relative;
+		.s-icon {
+			width: 30px;
+		    height: 30px;
+		    position: absolute;
+		    top: 5px;
+		    right: 0;
+			&:before,
+			&:after {
+				content:"";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				background: var(--#{$prefix}dark);
+			}
+			&:before {
+				width: 2px;
+				height: 10px;
+			}
+			&:after {
+				width: 10px;
+				height: 2px;
+			}
+			&[aria-expanded="true"] {
+				&:before {
+					height: 0;
+				}
+			}
+		}
+	}
+	.nav-link {
+		padding: 8px 0;
+		color: var(--#{$prefix}dark);
+		font-weight: 500;
+		span {
+			color: var(--#{$prefix}body-color);
+			font-size: 13px;
+		}
+		&.active,
+		&:hover {
+			color: var(--#{$prefix}primary);
+		}
+	}
+}
+
+
+/* Sidebar
+---------------------------*/
+.shop-sidebar-list {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+}
+
+.shop-sidebar-block {
+	margin-bottom: 30px;
+	.shop-sidebar-title {
+		position: relative;
+		h5 {
+			margin: 0 0 15px;
+			padding: 0 0 12px;
+			border-bottom: 1px solid var(--#{$prefix}gray-300);
+			font-size: 16px;
+			text-transform: uppercase;
+			font-weight: 600;
+		    width: 100%;
+		    display: inline-block;
+		    vertical-align: top;
+		    color: var(--#{$prefix}dark);
+			&[aria-expanded="false"] {
+				i {
+					&:before {
+						content: "\f282";
+					}
+				}
+			}
+		}
+		i {
+			position: absolute;
+		    right: 0;
+		    top: 3px;
+		}
+	}
+}
+
+
+/* Sidebar
+---------------------------*/
+.shop-top-bar {
+	.layout-change {
+		.btn {
+			padding: 0;
+		    width: 38px;
+		    height: 38px;
+		    display: inline-flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 1px solid var(--#{$prefix}gray-300);
+		    i {
+			    font-size: 18px;
+			    line-height: 1;
+		    }
+		    &.active,
+		    &:hover {
+		    	background: var(--#{$prefix}dark);
+		    	border-color: var(--#{$prefix}dark);
+		    	color: var(--#{$prefix}white);
+		    }
+		}
+	}
+}

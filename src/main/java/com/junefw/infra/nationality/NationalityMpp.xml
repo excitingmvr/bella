@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.nationality.NationalityMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.nationality.Nationality"></resultMap>
+	
+	<sql id ="selectCommon">
+		FROM 
+			infrNationality a
+		WHERE 1=1
+			<if test="shUseNy != null and !shUseNy.equals('')">AND ifnaUseNy = #{shUseNy}</if>
+			<if test="shDelNy != null and !shDelNy.equals('')">AND ifnaDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND ifnaName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND ifnaNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND ifnaCode2Char LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND ifnaCode3Char LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.ifnaSeq
+				,a.ifnaName
+				,a.ifnaNameKor
+				,a.ifnaNameEng
+				,a.ifnaCode2Char
+				,a.ifnaCode3Char
+				,a.ifnaUseNy
+				,a.ifnaOrder
+				,a.ifnaDesc
+				,a.ifnaDelNy
+		<include refid="Base.selectRegModWithAlies" />
+		<include refid="selectCommon" />
+			ORDER BY a.ifnaSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ifnaSeq
+			,a.ifnaName
+			,a.ifnaNameKor
+			,a.ifnaNameEng
+			,a.ifnaCode2Char
+			,a.ifnaCode3Char
+			,a.ifnaUseNy
+			,a.ifnaOrder
+			,a.ifnaDesc
+			,a.ifnaDelNy
+			<include refid="Base.selectRegModWithAlies" />
+		FROM
+			infrNationality a
+		WHERE 1=1
+			AND a.ifnaSeq = #{ifnaSeq}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO infrNationality (
+			ifnaName
+			,ifnaNameKor
+			,ifnaNameEng
+			,ifnaCode2Char
+			,ifnaCode3Char
+			,ifnaUseNy
+			,ifnaOrder
+			,ifnaDesc
+			,ifnaDelNy
+			<include refid="Base.insertRegModColumn" />
+		)
+		VALUES (
+			#{ifnaName}
+			,#{ifnaNameKor}
+			,#{ifnaNameEng}
+			,#{ifnaCode2Char}
+			,#{ifnaCode3Char}
+			,#{ifnaUseNy}
+			,#{ifnaOrder}
+			,#{ifnaDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifnaSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="update">
+		UPDATE infrNationality
+		SET
+			ifnaName = #{ifnaName}
+			,ifnaNameKor = #{ifnaNameKor}
+			,ifnaNameEng = #{ifnaNameEng}
+			,ifnaCode2Char = #{ifnaCode2Char}
+			,ifnaCode3Char = #{ifnaCode3Char}
+			,ifnaUseNy = #{ifnaUseNy}
+			,ifnaOrder = #{ifnaOrder}
+			,ifnaDesc = #{ifnaDesc}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifnaSeq = #{ifnaSeq}
+	</update>
+	
+	
+	<update id="uelete">
+		UPDATE infrNationality
+		SET
+			ifnaDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifnaSeq = #{ifnaSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrNationality
+		WHERE 1=1
+			AND ifnaSeq = #{ifnaSeq}
+	</delete>
+
+	
+</mapper>
+
+
+

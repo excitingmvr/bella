@@ -1,0 +1,127 @@
+.product-details-03 {
+	.product-detail-media {
+		.pd-video-box {
+			display: flex;
+			.pd-video-box-in {
+				display: flex;
+			    height: 100%;
+			    width: 100%;
+			    video {
+		    	    height: 100%;
+					width: 100%;
+			    }
+			}
+		}
+	}
+	.product-detail {
+		.breadcrumb {
+			padding-bottom: 8px;
+		}
+		.products-title-head {
+			border-bottom: 1px solid var(--#{$prefix}gray-300);
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+		}
+		.products-title {
+			display: flex;
+			.h4 {
+				font-size: 24px;
+				font-weight: 600;
+			}
+			.product-price {
+				display: flex;
+				flex-direction: column;
+				padding-left: 15px;
+				span {
+					font-size: 20px;
+					font-weight: 600;
+					color: var(--#{$prefix}dark);
+				}
+			}
+		}
+		.product-attributes {
+			border-bottom: 1px solid var(--#{$prefix}gray-300);
+			margin-bottom: 20px;
+			padding-bottom: 20px;
+			.product-attribute-in {
+				+ .product-attribute-in {
+					padding-top: 20px
+				}
+			}
+			.att-label {
+				padding-bottom: 15px;
+				display: flex;
+				h6 {
+					font-weight: 700;
+					color: var(--#{$prefix}dark);
+					margin: 0;
+					font-size: 16px;
+					span {
+						font-weight: normal;
+						color: var(--#{$prefix}body-color);
+					    padding-left: 5px;
+						font-size: 90%;
+					}
+				}
+				a {
+					font-size: 0.73rem;
+				    line-height: normal;
+				    text-transform: uppercase;
+				}
+			}
+		}
+		.cart-qty-01 {
+			width: 105px;
+		}
+		.product-detail-actions {
+			padding-top: 20px;
+			.cart-button {
+				flex: 1;
+				.btn {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+
+
+.product-nav-tabs-03 {
+	justify-content: center;
+	.nav-item {
+		+ .nav-item {
+			margin-left: 10px;
+		}
+	}
+	.nav-link {
+		text-transform: uppercase;
+		font-size: 20px;
+		font-weight: 600;
+		padding: 5px 5px;
+		position: relative;
+		color: var(--#{$prefix}dark);
+		font-size: 16px;
+		letter-spacing: 1px;
+		&:after {
+			content: "";
+			position: absolute;
+			left: auto;
+			right: 0;
+			bottom: 0;
+			width: 0px;
+			height: 2px;
+			background: currentColor;
+			transition: ease all 0.35s;
+		}
+		&.active,
+		&:hover {
+			color: var(--#{$prefix}primary);
+			&:after {
+				width: 100%;
+				left: 0;
+				right: auto;
+			}
+		}
+	}
+}

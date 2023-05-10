@@ -1,0 +1,45 @@
+
+
+// You easily change theme using
+
+$primary:               #b96f4a !default; 
+//$secondary:             #(color code) !default;
+//$info:                  #(color code) !default;
+//$success:               #(color code) !default;
+//$warning:               #(color code) !default;
+//$danger:                #(color code) !default;
+//$light:                 #(color code) !default;
+$dark:                  #152242 !default;
+
+
+// Font change
+
+// Import fonts from Google
+// go to https://fonts.google.com copy and paste the URL of the selected font from the @import tab
+// (e.g: https://fonts.googleapis.com/css?family=Nunito) and peste it in the _variables.scss from the custom folder
+
+// Update font family in $font-family-sans-serif-cutom variables
+
+
+$font: "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" !default;
+$font-family-heading-cutom:      'Butler', -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif-cutom:	 'Nunito Sans', sans-serif !default;
+
+
+$font-family-sans-serif:      $font-family-sans-serif-cutom !default;
+$headings-font-family:        $font-family-sans-serif-cutom !default;
+//$headings-font-family:        $font-family-heading-cutom !default;
+$font-alt:			$font-family-heading-cutom !default;
+
+
+
+// Body
+//
+// Settings for the `<body>` element.
+$body-color:            #616174 !default;
+
+
+// Links
+//
+// Style anchor elements.
+$font-weight-base:     500 !default;

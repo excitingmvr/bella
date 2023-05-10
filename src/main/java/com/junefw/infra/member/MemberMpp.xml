@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.member.MemberMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.member.Member"></resultMap>
+	
+	<!-- infrMember s -->
+	<sql id ="selectCommon">
+		FROM 
+			infrMember a
+			LEFT JOIN infrMemberEmail b ON b.ifmeDelny = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
+			LEFT JOIN infrMemberPhone c ON c.ifmpDelny = 0 AND c.ifmpDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.ifmmDelNy = #{shDelNy}</if>
+			<if test="shAdminNy != null and !shAdminNy.equals('')">AND a.ifmmAdminNy = #{shAdminNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 3">AND a.ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<choose>
+				<when test="shOption == 1">AND a.ifmmName LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND a.ifmmId LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 3">AND b.ifmeEmailFull LIKE CONCAT('%',#{shValue},'%')</when>
+				<when test="shOption == 4">AND c.ifmpNumber LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.ifmmSeq
+				,a.ifmmAdminNy
+				,a.ifmmDormancyNy
+				,a.ifmmSocialLoginCd
+				,a.ifmmName
+				,a.ifmmNameEng
+				,a.ifmmLastName
+				,a.ifmmFirstName
+				,a.ifmmLastNameEng
+				,a.ifmmFirstNameEng
+				,a.ifmmId
+				,a.ifmmPassword
+				,a.ifmmPwdModDate
+				,a.ifmmNickname
+				,a.ifmmGenderCd
+				,a.ifmmDob
+				,a.ifmmSavedCd
+				,a.ifmmMarriageCd
+				,a.ifmmMarriageDate
+				,a.ifmmChildrenNum
+				,a.ifmmFavoriteColor
+				,a.ifmmRecommenderSeq
+				,a.ifmmEmailConsentNy
+				,a.ifmmSmsConsentNy
+				,a.ifmmPushConsentNy
+				,a.ifmmCountryResidence
+				,a.ifmmDesc
+				,a.ifmmDelNy
+				,a.regIp
+				,a.regSeq
+				,a.regDeviceCd
+				,a.regDateTime
+				,a.regDateTimeSvr
+				,a.modIp
+				,a.modSeq
+				,a.modDeviceCd
+				,a.modDateTime
+				,a.modDateTimeSvr
+				,b.ifmeEmailFull
+				,c.ifmpNumber
+		<include refid="selectCommon" />
+			ORDER BY a.ifmmSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmAdminNy
+			,a.ifmmDormancyNy
+			,a.ifmmSocialLoginCd
+			,a.ifmmName
+			,a.ifmmNameEng
+			,a.ifmmLastName
+			,a.ifmmFirstName
+			,a.ifmmLastNameEng
+			,a.ifmmFirstNameEng
+			,a.ifmmId
+			,a.ifmmPassword
+			,a.ifmmPwdModDate
+			,a.ifmmNickname
+			,a.ifmmGenderCd
+			,a.ifmmDob
+			,a.ifmmSavedCd
+			,a.ifmmMarriageCd
+			,a.ifmmMarriageDate
+			,a.ifmmChildrenNum
+			,a.ifmmFavoriteColor
+			,a.ifmmRecommenderSeq
+			,a.ifmmEmailConsentNy
+			,a.ifmmSmsConsentNy
+			,a.ifmmPushConsentNy
+			,a.ifmmCountryResidence
+			,a.ifmmDesc
+			,a.ifmmDelNy
+			<include refid="Base.selectRegModWithAlies" />
+			,b.ifmeEmailFull
+			,c.ifmaAddress1
+			,c.ifmaAddress2
+			,c.ifmaAddress3
+			,c.ifmaZipcode
+			,c.ifmaLat
+			,c.ifmaLng
+		FROM
+			infrMember a
+			LEFT JOIN infrMemberEmail b ON b.ifmeDelNy = 0 AND b.ifmeDefaultNy = 1 AND b.ifmmSeq = a.ifmmSeq
+			LEFT JOIN infrMemberAddress c ON c.ifmaDelNy = 0 AND c.ifmaDefaultNy = 1 AND c.ifmmSeq = a.ifmmSeq
+		WHERE 1=1
+			AND a.ifmmSeq = #{ifmmSeq}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO infrMember (
+			ifmmAdminNy
+			,ifmmDormancyNy
+			,ifmmSocialLoginCd
+			,ifmmName
+			,ifmmNameEng
+			,ifmmLastName
+			,ifmmFirstName
+			,ifmmLastNameEng
+			,ifmmFirstNameEng
+			,ifmmId
+			,ifmmPassword
+			,ifmmNickname
+			,ifmmGenderCd
+			,ifmmDob
+			,ifmmSavedCd
+			,ifmmMarriageCd
+			,ifmmChildrenNum
+			,ifmmFavoriteColor
+			,ifmmRecommenderSeq
+			,ifmmEmailConsentNy
+			,ifmmSmsConsentNy
+			,ifmmPushConsentNy
+			,ifmmCountryResidence
+			,ifmmDesc
+			,ifmmDelNy
+			<include refid="Base.insertRegModColumn" />
+		) VALUES (
+			0
+			,0
+			,103
+			,#{ifmmName}
+			,#{ifmmNameEng}
+			,#{ifmmLastName}
+			,#{ifmmFirstName}
+			,#{ifmmLastNameEng}
+			,#{ifmmFirstNameEng}
+			,#{ifmmId}
+			,#{ifmmPassword}
+			,#{ifmmNickname}
+			,#{ifmmGenderCd}
+			<choose>
+				<when test="ifmmDob.equals('')">,NULL</when>
+				<otherwise>,#{ifmmDob}</otherwise>
+			</choose>
+			,#{ifmmSavedCd}
+			,#{ifmmMarriageCd}
+			,#{ifmmChildrenNum}
+			,#{ifmmFavoriteColor}
+			,#{ifmmRecommenderSeq}
+			,#{ifmmEmailConsentNy}
+			,#{ifmmSmsConsentNy}
+			,#{ifmmPushConsentNy}
+			,#{ifmmCountryResidence}
+			,#{ifmmDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="update">
+		UPDATE infrMember
+		SET
+			ifmmAdminNy = #{ifmmAdminNy}
+			,ifmmDormancyNy = #{ifmmDormancyNy}
+			,ifmmName = #{ifmmName}
+			,ifmmNameEng = #{ifmmNameEng}
+			,ifmmLastName = #{ifmmLastName}
+			,ifmmFirstName = #{ifmmFirstName}
+			,ifmmLastNameEng = #{ifmmLastNameEng}
+			,ifmmFirstNameEng = #{ifmmFirstNameEng}
+			,ifmmNickname = #{ifmmNickname}
+			,ifmmGenderCd = #{ifmmGenderCd}
+			,ifmmDob = #{ifmmDob}
+			,ifmmSavedCd = #{ifmmSavedCd}
+			,ifmmMarriageCd = #{ifmmMarriageCd}
+			,ifmmMarriageDate = #{ifmmMarriageDate}
+			,ifmmChildrenNum = #{ifmmChildrenNum}
+			,ifmmFavoriteColor = #{ifmmFavoriteColor}
+			,ifmmRecommenderSeq = #{ifmmRecommenderSeq}
+			,ifmmEmailConsentNy = #{ifmmEmailConsentNy}
+			,ifmmSmsConsentNy = #{ifmmSmsConsentNy}
+			,ifmmPushConsentNy = #{ifmmPushConsentNy}
+			,ifmmCountryResidence = #{ifmmCountryResidence}
+			,ifmmDesc = #{ifmmDesc}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	
+	<update id="uelete">
+		UPDATE infrMember
+		SET
+			ifmmDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM infrMember
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</delete>
+	
+	
+	<select id="selectListUploaded" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,type
+			,defaultNy
+			,sort
+			,path
+			,originalName
+			,uuidName
+		FROM nct.infrMemberUploaded
+		WHERE 1=1
+			AND delNy = 0
+			AND pseq = #{ifmmSeq}
+		ORDER BY
+			type, sort
+	</select>
+	
+	
+	<select id="selectOneIdCheck" resultType="Integer">
+		SELECT
+			count(ifmmSeq)
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+	</select>
+	<!-- infrMember e -->
+	
+	
+	<!-- infrMemberEmail s -->
+	<insert id="insertEmail">
+		INSERT INTO infrMemberEmail (
+			ifmeDefaultNy
+			,ifmeTypeCd
+			,ifmeEmailFull
+			,ifmeEmailAccount
+			,ifmeEmailDomain
+			,ifmeEmailDomainCd
+			,ifmeDelNy
+			<include refid="Base.insertRegModColumn" />
+			,ifmmSeq
+		) VALUES (
+			#{ifmeDefaultNy}
+			,#{ifmeTypeCd}
+			,#{ifmeEmailFull}
+			,#{ifmeEmailAccount}
+			,#{ifmeEmailDomain}
+			,#{ifmeEmailDomainCd}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{ifmmSeq}
+		)
+	</insert>
+	<!-- infrMemberEmail e -->
+	
+	<!-- infrMemberPhone s -->
+	<select id="selectListPhone" resultMap="resultMapObj">
+		SELECT
+			ifmpSeq
+			,ifmpDefaultNy
+			,ifmpTypeCd
+			,ifmpDeviceCd
+			,ifmpTelecomCd
+			,ifmpNumber
+		FROM
+			infrMemberPhone
+		WHERE 1=1
+			AND ifmpDelNy = 0
+			AND ifmmSeq = #{ifmmSeq}
+	</select>
+	
+	
+	<insert id="insertPhone">
+		INSERT INTO infrMemberPhone (
+			ifmpDefaultNy
+			,ifmpTypeCd
+			,ifmpDeviceCd
+			,ifmpTelecomCd
+			,ifmpNumber
+			,ifmpDelNy
+			<include refid="Base.insertRegModColumn" />
+			,ifmmSeq
+		) VALUES (
+			#{ifmpDefaultNy}
+			,#{ifmpTypeCd}
+			,#{ifmpDeviceCd}
+			,#{ifmpTelecomCd}
+			,#{ifmpNumber}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{ifmmSeq}
+		)
+	</insert>
+	<!-- infrMemberPhone e -->
+	
+	<!-- infrMemberAddress s -->
+	<insert id="insertAddress">
+		INSERT INTO infrMemberAddress (
+			ifmaDefaultNy
+			,ifmaTypeCd
+			,ifmaTitle
+			,ifmaAddress1
+			,ifmaAddress2
+			,ifmaAddress3
+			,ifmaZipcode
+			,ifmaLat
+			,ifmaLng
+			,ifmaDelNy
+			<include refid="Base.insertRegModColumn" />
+			,ifmmSeq
+		) VALUES (
+			#{ifmaDefaultNy}
+			,#{ifmaTypeCd}
+			,#{ifmaTitle}
+			,#{ifmaAddress1}
+			,#{ifmaAddress2}
+			,#{ifmaAddress3}
+			,#{ifmaZipcode}
+			,#{ifmaLat}
+			,#{ifmaLng}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{ifmmSeq}
+		)
+	</insert>
+	<!-- infrMemberAddress e -->
+	
+	
+	<!-- login s -->
+	<select id="selectOneId" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+	</select>
+	
+	
+	<select id="selectOneLogin" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+			,a.ifmmName
+			,a.ifmmDesc
+			,a.ifmmPwdModDate
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND a.ifmmId = #{ifmmId}
+			<if test="ifmmPassword != null and !ifmmPassword.equals('')">AND a.ifmmPassword = #{ifmmPassword}</if>
+	</select>
+	<!-- login e -->
+	
+	
+	<!-- logLogin s -->
+	<insert id="insertLogLogin">
+		INSERT INTO infrLogLogin (
+			iflgLoginUiCd
+			,ifmmSocialLoginCd
+			,ifmmId
+			,ifmmSeq
+			,iflgResultNy
+			,iflgDelNy
+			<include refid="Base.insertRegColumn" />
+		) values (
+			#{iflgLoginUiCd}
+			,#{ifmmSocialLoginCd}
+			,#{ifmmId}
+			,#{ifmmSeq}
+			,#{iflgResultNy}
+			,0
+			<include refid="Base.insertRegValue" />
+		)
+	</insert>
+	<!-- logLogin e -->
+	
+	
+	<update id="updateIfmmPwdModDate">
+		UPDATE infrMember SET ifmmPwdModDate = #{ifmmPwdModDate}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	
+	<insert id="insertSocialLoginMember">
+		INSERT INTO infrMember (
+			ifmmAdminNy
+			,ifmmDormancyNy
+			,ifmmSocialLoginCd
+			,ifmmName
+			,ifmmNameEng
+			,ifmmLastName
+			,ifmmFirstName
+			,ifmmLastNameEng
+			,ifmmFirstNameEng
+			,ifmmId
+			,ifmmPassword
+			,ifmmNickname
+			,ifmmGenderCd
+			,ifmmDob
+			,ifmmSavedCd
+			,ifmmMarriageCd
+			,ifmmChildrenNum
+			,ifmmFavoriteColor
+			,ifmmRecommenderSeq
+			,ifmmEmailConsentNy
+			,ifmmSmsConsentNy
+			,ifmmPushConsentNy
+			,ifmmCountryResidence
+			,ifmmDesc
+			,ifmmDelNy
+			<include refid="Base.insertRegModColumn" />
+		) VALUES (
+			0
+			,0
+			,#{ifmmSocialLoginCd}
+			,#{ifmmName}
+			,#{ifmmNameEng}
+			,#{ifmmLastName}
+			,#{ifmmFirstName}
+			,#{ifmmLastNameEng}
+			,#{ifmmFirstNameEng}
+			,#{ifmmId}
+			,#{ifmmPassword}
+			,#{ifmmNickname}
+			,#{ifmmGenderCd}
+			<choose>
+				<when test="ifmmDob.equals('')">,NULL</when>
+				<otherwise>,#{ifmmDob}</otherwise>
+			</choose>
+			,#{ifmmSavedCd}
+			,#{ifmmMarriageCd}
+			,#{ifmmChildrenNum}
+			,#{ifmmFavoriteColor}
+			,#{ifmmRecommenderSeq}
+			,#{ifmmEmailConsentNy}
+			,#{ifmmSmsConsentNy}
+			,#{ifmmPushConsentNy}
+			,#{ifmmCountryResidence}
+			,#{ifmmDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+	
+	<select id="selectOneFindIdPwd" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+			,a.ifmmId
+			,a.ifmmName
+		FROM
+			infrMember a
+			LEFT JOIN infrMemberEmail b ON b.ifmmSeq = a.ifmmSeq
+		WHERE 1=1
+			AND a.ifmmName = #{ifmmName}
+			AND b.ifmeEmailFull = #{ifmeEmailFull}
+			<if test="ifmmId != null and !ifmmId.equals('')">AND a.ifmmId = #{ifmmId}</if>
+	</select>
+	
+	
+	<update id="updateChangePwd">
+		UPDATE infrMember 
+		SET 
+			ifmmPassword = #{ifmmPassword}
+			,modDateTime = #{modDateTime}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</update>
+		
+</mapper>
+
+
+

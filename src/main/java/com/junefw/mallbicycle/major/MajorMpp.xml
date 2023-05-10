@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                   
+<mapper namespace="com.junefw.mallbicycle.major.MajorMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.mallbicycle.major.Major"></resultMap>
+
+<!-- goods -->	
+	<sql id ="selectCommonMajorGoods">
+		FROM 
+			mbccMajorGoods a
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmgDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectListMajorGoods" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.mbmgSeq
+				,a.mbmgTypeCd
+				,a.mbmgTypeDetailCd
+				,a.mbmgTitle
+				,a.mbmgBrandCt
+				,a.mbmgModelCt
+				,a.mbmgProductionYear
+				,a.mbmgSizeCd
+				,a.mbmgMaterialCd
+				,a.mbmgDriveTrainCd
+				,a.mbmgBreakCd
+				,a.mbmgWheelCd
+				,a.mbmgTireCd
+				,a.mbmgDriveSystemCd
+				,a.mbmgDesc
+				,a.mbmgDelNy
+		<include refid="Base.selectRegModWithAlies" />
+				,a.ifmmSeq
+		<include refid="selectCommonMajorGoods" />
+			ORDER BY a.mbmgSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCountMajorGoods" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorGoods" />
+	</select>
+	
+	
+	<select id="selectOneMajorGoods" resultMap="resultMapObj">
+		SELECT
+			a.mbmgSeq
+			,a.mbmgTypeCd
+			,a.mbmgTypeDetailCd
+			,a.mbmgTitle
+			,a.mbmgBrandCt
+			,a.mbmgModelCt
+			,a.mbmgProductionYear
+			,a.mbmgSizeCd
+			,a.mbmgMaterialCd
+			,a.mbmgDriveTrainCd
+			,a.mbmgBreakCd
+			,a.mbmgWheelCd
+			,a.mbmgTireCd
+			,a.mbmgDriveSystemCd			
+			,a.mbmgDesc
+			,a.mbmgDelNy
+			<include refid="Base.selectRegModWithAlies" />
+			,a.ifmmSeq
+		FROM
+			mbccMajorGoods a
+		WHERE 1=1
+			AND a.mbmgSeq = #{mbmgSeq}
+	</select>
+	
+	
+	<insert id="insertMajorGoods">
+		INSERT INTO mbccMajorGoods (
+			mbmgTypeCd
+			,mbmgTypeDetailCd
+			,mbmgTitle
+			,mbmgBrandCt
+			,mbmgModelCt
+			,mbmgProductionYear
+			,mbmgSizeCd
+			,mbmgMaterialCd
+			,mbmgDriveTrainCd
+			,mbmgBreakCd
+			,mbmgWheelCd
+			,mbmgTireCd
+			,mbmgDriveSystemCd			
+			,mbmgDesc
+			,mbmgDelNy
+			<include refid="Base.insertRegModColumn" />
+			,ifmmSeq			
+		)
+		VALUES (
+			#{mbmgTypeCd}
+			,#{mbmgTypeDetailCd}
+			,#{mbmgTitle}
+			,#{mbmgBrandCt}
+			,#{mbmgModelCt}
+			,#{mbmgProductionYear}
+			,#{mbmgSizeCd}
+			,#{mbmgMaterialCd}
+			,#{mbmgDriveTrainCd}
+			,#{mbmgBreakCd}
+			,#{mbmgWheelCd}
+			,#{mbmgTireCd}
+			,#{mbmgDriveSystemCd}			
+			,#{mbmgDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{ifmmSeq}			
+		)
+		 <selectKey resultType="String" keyProperty="mbmgSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="updateMajorGoods">
+		UPDATE mbccMajorGoods
+		SET
+			mbmgSeq = #{mbmgSeq}
+			,mbmgTypeCd = #{mbmgTypeCd}
+			,mbmgTypeDetailCd = #{mbmgTypeDetailCd}
+			,mbmgTitle = #{mbmgTitle}
+			,mbmgBrandCt = #{mbmgBrandCt}
+			,mbmgModelCt = #{mbmgModelCt}
+			,mbmgProductionYear = #{mbmgProductionYear}
+			,mbmgSizeCd = #{mbmgSizeCd}
+			,mbmgMaterialCd = #{mbmgMaterialCd}
+			,mbmgDriveTrainCd = #{mbmgDriveTrainCd}
+			,mbmgBreakCd = #{mbmgBreakCd}
+			,mbmgWheelCd = #{mbmgWheelCd}
+			,mbmgTireCd = #{mbmgTireCd}
+			,mbmgDriveSystemCd = #{mbmgDriveSystemCd}
+			,mbmgDesc = #{mbmgDesc}
+			<include refid="Base.updateModColumnValue" />
+			,ifmmSeq = #{ifmmSeq}			
+		WHERE 1=1
+			AND mbmgSeq = #{mbmgSeq}
+	</update>
+	
+	
+	<update id="ueleteMajorGoods">
+		UPDATE mbccMajorGoods
+		SET
+			mbmgDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND mbmgSeq = #{mbmgSeq}
+	</update>
+	
+	
+	<delete id="deleteMajorGoods">
+		DELETE FROM mbccMajorGoods
+		WHERE 1=1
+			AND mbmgSeq = #{mbmgSeq}
+	</delete>
+
+<!-- trade -->
+<sql id ="selectCommonMajorTrade">
+		FROM 
+			mbccMajorTrade a
+			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict c on c.mbmtSeq = a.mbmtSeq AND c.mbtdDefaultNy = 1			
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmtDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectListMajorTrade" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.mbmtSeq
+				,a.mbmtTitle
+				,a.mbmtPrice
+				,a.mbmtSalesNy
+				,a.mbmtDelNy
+		<include refid="Base.selectRegModWithAlies" />
+				,a.mbmgSeq
+				,b.mbmgTypeCd
+				,b.mbmgTypeDetailCd
+				,b.mbmgTitle
+				,b.mbmgBrandCt
+				,b.mbmgModelCt
+				,b.mbmgProductionYear
+				,b.mbmgSizeCd
+				,b.mbmgMaterialCd
+				,b.mbmgDriveTrainCd
+				,b.mbmgBreakCd
+				,b.mbmgWheelCd
+				,b.mbmgTireCd
+				,b.mbmgDriveSystemCd
+				,c.mbtdSeq
+				,c.mbtdDefaultNy
+				,c.mbtdDistrictCt
+				,c.mbtdDistrict2Ct
+				,c.mbtdDistrict3Ct
+				,c.mbtdDistrict4Ct
+				,c.mbtdDistrictDetail
+				,c.mbtdDelNy				
+		<include refid="selectCommonMajorTrade" />
+			ORDER BY a.mbmtSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCountMajorTrade" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorTrade" />
+	</select>
+	
+	
+	<select id="selectOneMajorTrade" resultMap="resultMapObj">
+		SELECT
+			a.mbmtSeq
+			,a.mbmtTitle
+			,a.mbmtPrice
+			,a.mbmtSalesNy
+			,a.mbmtDesc
+			,a.mbmtDelNy
+			<include refid="Base.selectRegModWithAlies" />
+			,a.mbmgSeq
+			,b.mbmgTypeCd
+			,b.mbmgTypeDetailCd
+			,b.mbmgTitle
+			,b.mbmgBrandCt
+			,b.mbmgModelCt
+			,b.mbmgProductionYear
+			,b.mbmgSizeCd
+			,b.mbmgMaterialCd
+			,b.mbmgDriveTrainCd
+			,b.mbmgBreakCd
+			,b.mbmgWheelCd
+			,b.mbmgTireCd
+			,b.mbmgDriveSystemCd			
+			,b.mbmgDesc
+			,c.mbtdSeq
+			,c.mbtdDefaultNy
+			,c.mbtdDistrictCt
+			,c.mbtdDistrict2Ct
+			,c.mbtdDistrict3Ct
+			,c.mbtdDistrict4Ct
+			,c.mbtdDistrictDetail
+			,c.mbtdDelNy
+		FROM
+			mbccMajorTrade a
+			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict c on c.mbmtSeq = a.mbmtSeq AND c.mbtdDefaultNy = 1			
+		WHERE 1=1
+			AND a.mbmtSeq = #{mbmtSeq}
+	</select>
+	
+	
+	<insert id="insertMajorTrade">
+		INSERT INTO mbccMajorTrade (
+			mbmtTitle
+			,mbmtPrice
+			,mbmtSalesNy
+			,mbmtDesc
+			,mbmtDelNy
+			<include refid="Base.insertRegModColumn" />
+			,mbmgSeq
+		)
+		VALUES (
+			#{mbmtTitle}
+			,#{mbmtPrice}
+			,#{mbmtSalesNy}
+			,#{mbmtDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{mbmgSeq}
+		)
+		 <selectKey resultType="String" keyProperty="mbmt" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="updateMajorTrade">
+		UPDATE mbccMajorTrade
+		SET
+			mbmtTitle = #{mbmtTitle}
+			,mbmtPrice = #{mbmtPrice}
+			,mbmtSalesNy = #{mbmtSalesNy}
+			,mbmtDesc = #{mbmtDesc}
+			<include refid="Base.updateModColumnValue" />
+			,mbmgSeq = #{mbmgSeq}
+		WHERE 1=1
+			AND mbmtSeq = #{mbmtSeq}
+	</update>
+	
+	
+	<update id="ueleteMajorTrade">
+		UPDATE mbccMajorTrade
+		SET
+			mbmtDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND mbmtSeq = #{mbmtSeq}
+	</update>
+	
+	
+	<delete id="deleteMajorTrade">
+		DELETE FROM mbccMajorTrade
+		WHERE 1=1
+			AND mbmtSeq = #{mbmtSeq}
+	</delete>
+	
+	
+<!-- favorite -->
+	<sql id ="selectCommonMajorFavorite">
+		FROM 
+			mbccMajorFavorite a
+		    LEFT JOIN mbccMajorTrade b on b.mbmtSeq = a.mbmtSeq
+		    LEFT JOIN mbccMajorGoods c on c.mbmgSeq = b.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict d on d.mbmtSeq = b.mbmtSeq AND d.mbtdDefaultNy = 1		    
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmfDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectListMajorFavorite" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.mbmfSeq
+				,a.mbmfDelNy
+				<include refid="Base.selectRegModWithAlies" />
+				,a.mbmtSeq
+				,b.mbmtTitle
+				,b.mbmtPrice
+				,b.mbmtSalesNy
+				,b.mbmtDesc
+				,b.mbmtDelNy
+				,c.mbmgTypeCd
+				,c.mbmgTypeDetailCd
+				,c.mbmgTitle
+				,c.mbmgBrandCt
+				,c.mbmgModelCt
+				,c.mbmgProductionYear
+				,c.mbmgSizeCd
+				,c.mbmgMaterialCd
+				,c.mbmgDriveTrainCd
+				,c.mbmgBreakCd
+				,c.mbmgWheelCd
+				,c.mbmgTireCd
+				,c.mbmgDriveSystemCd				
+				,c.mbmgDesc
+				,d.mbtdSeq
+				,d.mbtdDefaultNy
+				,d.mbtdDistrictCt
+				,d.mbtdDistrict2Ct
+				,d.mbtdDistrict3Ct
+				,d.mbtdDistrict4Ct
+				,d.mbtdDistrictDetail
+				,d.mbtdDelNy	
+		<include refid="selectCommonMajorFavorite" />
+			ORDER BY a.mbmtSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCountMajorFavorite" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorFavorite" />
+	</select>
+	
+	
+	<select id="selectOneMajorFavorite" resultMap="resultMapObj">
+		SELECT
+				a.mbmfSeq
+				,a.mbmfDelNy
+				<include refid="Base.selectRegModWithAlies" />
+				,a.mbmtSeq
+				,b.mbmtTitle
+				,b.mbmtPrice
+				,b.mbmtSalesNy
+				,b.mbmtDesc
+				,b.mbmtDelNy
+				,c.mbmgTypeCd
+				,c.mbmgTypeDetailCd
+				,c.mbmgTitle
+				,c.mbmgBrandCt
+				,c.mbmgModelCt
+				,c.mbmgProductionYear
+				,c.mbmgSizeCd
+				,c.mbmgMaterialCd
+				,c.mbmgDriveTrainCd
+				,c.mbmgBreakCd
+				,c.mbmgWheelCd
+				,c.mbmgTireCd
+				,c.mbmgDriveSystemCd				
+				,c.mbmgDesc
+				,d.mbtdSeq
+				,d.mbtdDefaultNy
+				,d.mbtdDistrictCt
+				,d.mbtdDistrict2Ct
+				,d.mbtdDistrict3Ct
+				,d.mbtdDistrict4Ct
+				,d.mbtdDistrictDetail
+				,d.mbtdDelNy	
+		FROM
+			mbccMajorFavorite a
+		    LEFT JOIN mbccMajorTrade b on b.mbmtSeq = a.mbmtSeq
+		    LEFT JOIN mbccMajorGoods c on c.mbmgSeq = b.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict d on d.mbmtSeq = b.mbmtSeq AND d.mbtdDefaultNy = 1		    
+		WHERE 1=1
+			AND a.mbmfSeq = #{mbmfSeq}
+	</select>
+	
+	
+	<insert id="insertMajorFavorite">
+		INSERT INTO mbccMajorFavorite (
+			mbmfDelNy
+			<include refid="Base.insertRegModColumn" />
+			,mbmtSeq,
+			,ifmmSeq
+		)
+		VALUES (
+			0
+			<include refid="Base.insertRegModValue" />
+			,#{mbmtSeq}
+			,#{ifmmSeq}
+		)
+		 <selectKey resultType="String" keyProperty="mbmfSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="ueleteMajorFavorite">
+		UPDATE mbccMajorFavorite
+		SET
+			mbmfDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND mbmfSeq = #{mbmfSeq}
+	</update>
+	
+	
+	<delete id="deleteMajorFavorite">
+		DELETE FROM mbccMajorFavorite
+		WHERE 1=1
+			AND mbmfSeq = #{mbmfSeq}
+	</delete>
+	
+	
+<!-- show -->
+<sql id ="selectCommonMajorShow">
+		FROM 
+			mbccMajorTrade a
+			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict c on c.mbmtSeq = a.mbmtSeq AND c.mbtdDefaultNy = 1
+		WHERE 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.mbmtDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+			<if test="shPostedDateStart != null and !shPostedDateStart.equals('')">AND a.regDateTime BETWEEN #{shPostedDateStart} AND #{shPostedDateEnd}</if>
+			<if test="shPriceStart != null and !shPriceStart.equals('')">AND a.mbmtPrice BETWEEN #{shPriceStart} AND #{shPriceEnd}</if>
+
+			<if test="shProductionYearStart != null and !shProductionYearStart.equals('')">AND b.mbmgProductionYear BETWEEN #{shProductionYearStart} AND #{shProductionYearEnd}</if>
+			<if test="shType != null and !shType.equals('')">AND b.mbmgTypeCd = #{shType}</if>
+			<if test="shTypeDetail != null and !shTypeDetail.equals('')">AND b.mbmgTypeDetailCd = #{shTypeDetail}</if>
+			<if test="shSize != null and !shSize.equals('')">AND b.mbmgSizeCd = #{shSize}</if>
+			<if test="shMaterial != null and !shMaterial.equals('')">AND b.mbmgMaterialCd = #{shMaterial}</if>
+			<if test="shDriveTrain != null and !shDriveTrain.equals('')">AND b.mbmgDriveTrainCd = #{shDriveTrain}</if>
+			<if test="shWheel != null and !shWheel.equals('')">AND b.mbmgWheelCd = #{shWheel}</if>
+			<if test="shBreak != null and !shBreak.equals('')">AND b.mbmgBreakCd = #{shBreak}</if>
+			<if test="shTire != null and !shTire.equals('')">AND b.mbmgTireCd = #{shTire}</if>
+			<if test="shBrand != null and !shBrand.equals('')">AND b.mbmgBrandCt = #{shBrand}</if>
+			<if test="shModel != null and !shModel.equals('')">AND b.mbmgModelCt = #{shModel}</if>
+			
+			<if test="shDistrict != null and !shDistrict.equals('')">AND c.mbtdDistrictCt = #{shDistrict}</if>
+			<if test="shDistrict2 != null and !shDistrict2.equals('')">AND c.mbtdDistrict2Ct = #{shDistrict2}</if>
+			<if test="shDistrict3 != null and !shDistrict3.equals('')">AND c.mbtdDistrict3Ct = #{shDistrict3}</if>
+			<if test="shDistrict3 != null and !shDistrict3.equals('')">AND c.mbtdDistrict3Ct = #{shDistrict4}</if>
+	</sql>
+
+
+	<select id="selectListMajorShow" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.mbmtSeq
+				,a.mbmtTitle
+				,a.mbmtPrice
+				,a.mbmtSalesNy
+				,a.mbmtDelNy
+		<include refid="Base.selectRegModWithAlies" />
+				,a.mbmgSeq
+				,b.mbmgTypeCd
+				,b.mbmgTypeDetailCd
+				,b.mbmgTitle
+				,b.mbmgBrandCt
+				,b.mbmgModelCt
+				,b.mbmgProductionYear
+				,b.mbmgSizeCd
+				,b.mbmgMaterialCd
+				,b.mbmgDriveTrainCd
+				,b.mbmgBreakCd
+				,b.mbmgWheelCd
+				,b.mbmgTireCd
+				,b.mbmgDriveSystemCd
+				,c.mbtdSeq
+				,c.mbtdDefaultNy
+				,c.mbtdDistrictCt
+				,c.mbtdDistrict2Ct
+				,c.mbtdDistrict3Ct
+				,c.mbtdDistrict4Ct
+				,c.mbtdDistrictDetail
+				,c.mbtdDelNy
+				<!-- ,(SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq) AS xMajorHitCount -->				
+				,(SELECT count(*) 
+					FROM (
+							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+						) aaa
+					) AS xMajorHitCount			
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+		<include refid="selectCommonMajorShow" />
+			ORDER BY a.mbmtSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	
+	<select id="selectOneCountMajorShow" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorShow" />
+	</select>
+	
+	
+	<select id="selectOneMajorShow" resultMap="resultMapObj">
+		SELECT
+			a.mbmtSeq
+			,a.mbmtTitle
+			,a.mbmtPrice
+			,a.mbmtSalesNy
+			,a.mbmtDesc
+			,a.mbmtDelNy
+			<include refid="Base.selectRegModWithAlies" />
+			,a.mbmgSeq
+			,b.mbmgTypeCd
+			,b.mbmgTypeDetailCd
+			,b.mbmgTitle
+			,b.mbmgBrandCt
+			,b.mbmgModelCt
+			,b.mbmgProductionYear
+			,b.mbmgSizeCd
+			,b.mbmgMaterialCd
+			,b.mbmgDriveTrainCd
+			,b.mbmgBreakCd
+			,b.mbmgWheelCd
+			,b.mbmgTireCd
+			,b.mbmgDriveSystemCd			
+			,b.mbmgDesc			
+			,c.mbtdSeq
+			,c.mbtdDefaultNy
+			,c.mbtdDistrictCt
+			,c.mbtdDistrict2Ct
+			,c.mbtdDistrict3Ct
+			,c.mbtdDistrict4Ct
+			,c.mbtdDistrictDetail
+			,c.mbtdDelNy
+			<!-- ,(SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq) AS xMajorHitCount -->
+			,(SELECT count(*) 
+				FROM (
+						SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+					) aaa
+				) AS xMajorHitCount			
+			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+		FROM
+			mbccMajorTrade a
+			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
+			LEFT JOIN mbccMajorTradeDistrict c on c.mbmtSeq = a.mbmtSeq AND c.mbtdDefaultNy = 1
+		WHERE 1=1
+			AND a.mbmtSeq = #{mbmtSeq}
+	</select>	
+
+<!-- hit -->
+	<insert id="insertMajorHit">
+		INSERT INTO mbccMajorHit (
+			mbmhDelNy
+			<include refid="Base.insertRegModColumn" />
+			,mbmtSeq
+			,ifmmSeq
+		)
+		VALUES (
+			0
+			<include refid="Base.insertRegModValue" />
+			,#{mbmtSeq}
+			,#{ifmmSeq}
+		)
+		 <selectKey resultType="String" keyProperty="mbmhSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>	
+</mapper>
+
+
+

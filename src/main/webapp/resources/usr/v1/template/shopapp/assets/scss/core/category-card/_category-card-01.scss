@@ -1,0 +1,22 @@
+.category-card-01 {
+	position: relative;
+	.category-card-info {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(var(--#{$prefix}dark-rgb), 0.3);
+		transition: ease all 0.35s;
+		opacity: 0;
+	}
+	&:hover {
+		.category-card-info {
+			opacity: 1;
+		}
+	}
+}

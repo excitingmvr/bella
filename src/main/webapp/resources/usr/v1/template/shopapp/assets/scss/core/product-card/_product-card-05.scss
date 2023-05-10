@@ -1,0 +1,130 @@
+/* Product Card 5
+-------------------------------------------*/
+.product-card-5 {
+	position: relative;
+	background: var(--#{$prefix}white);
+	.badge-ribbon {
+		position: absolute;
+		top: 15px;
+		left: 0;
+		z-index: 1;
+	}
+	.product-card-image {
+		position: relative;
+	}
+	.product-media {
+		overflow: hidden;
+		position: relative;
+		img {
+			width: 100%;
+		}
+		.product-hover-img {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    opacity: 0;
+		    transition: ease-in opacity 0.30s;
+		}
+
+	}
+	.product-wishlist-btn {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		z-index: 1;
+		.btn {
+			padding: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1;
+			margin-bottom: 10px;
+			transition: ease-in opacity 0.30s, ease-in left 0.30s;
+			position: relative;
+			&:hover {
+				background: var(--#{$prefix}dark);
+				border-color: var(--#{$prefix}dark);
+			}
+		}
+	}
+	.product-action {
+		position: absolute;
+		bottom: 15px;
+		right: 0;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		z-index: 1;
+		.btn {
+			padding: 0;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1;
+			margin-bottom: 10px;
+			transition: ease-in opacity 0.30s, ease-in top 0.30s;
+			position: relative;
+			top: -20px;
+			opacity: 0;
+			margin: 2px;
+			&:hover {
+				background: var(--#{$prefix}primary);
+				border-color: var(--#{$prefix}primary);
+			}
+		}
+	}
+
+	.product-card-info {
+		position: relative;
+		padding: 10px 15px 15px;
+		text-align: center;
+	}
+	.product-title {
+		font-weight: 600;
+		margin: 0 0 6px;
+		a {
+			color: var(--#{$prefix}dark);
+			&:hover {
+				color:var(--#{$prefix}primary);
+			}
+		}
+	}
+	.product-price {
+		span {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		del {
+			font-size: 14px;
+		}
+	}
+	.product-cart-btn {
+		padding-top: 10px;
+		.btn {
+			border-radius: 35px;
+		}
+	}
+
+	&:hover {
+		.product-media {		
+			.product-hover-img {
+				opacity: 1;
+			}
+		}
+		.product-action {
+			.btn {
+				top: 0;
+				opacity: 1;
+			}
+		}
+	}
+}

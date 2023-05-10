@@ -1,0 +1,87 @@
+/* Product Card 8
+-------------------------------------------*/
+.product-card-10 {
+	border: 1px solid var(--#{$prefix}gray-300);
+	.product-card-image {
+		position: relative;
+	}
+	.badge-ribbon {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		width: 45px;
+		height: 45px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 14px;
+		text-transform: uppercase;
+		background: var(--#{$prefix}danger);
+		color: var(--#{$prefix}white);
+		z-index: 1;
+		border-radius: 50%;
+	}
+	.product-media {
+		position: relative;
+		overflow: hidden;
+		border-bottom: 1px solid var(--#{$prefix}gray-300);
+		img {
+			transition: ease all 0.35s;
+			transform: scale(1);
+		}
+	}
+	.product-action {
+		padding-top: 8px;
+		.btn {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--#{$prefix}primary);
+			color: var(--#{$prefix}white);
+			margin: 0 2px;
+			padding: 0;
+			@include media-breakpoint-down(sm) {
+			    width: 26px;
+			    height: 26px;
+			    margin: 1px;
+			    font-size: 12px;
+			}
+			&:hover {
+				background: var(--#{$prefix}dark);
+				color: var(--#{$prefix}white);
+			}
+		}
+	}
+	.product-card-info {
+	    text-align: center;
+		padding: 15px;
+		@include media-breakpoint-down(sm) {
+			padding: 8px;
+		}
+	}
+	.rating-star {
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
+	.product-title {
+		font-size: 14px;
+		margin: 0;
+		a {
+			color: var(--#{$prefix}dark);
+		}
+	}
+	.product-price {
+		margin-top: 8px;
+		line-height: normal;
+	}
+	&:hover {
+		.product-media {
+			img {
+				transform: scale(1.03);
+			}
+		}
+	}
+}

@@ -1,0 +1,185 @@
+.header-option-10 {
+	&.fixed-header {
+		box-shadow: $box-shadow-sm;
+		.header-middle {
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+	}
+	.header-middle {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		position: relative;
+		border-bottom: 1px solid var(--#{$prefix}gray-300);
+		transition: ease padding 0.35s;
+		@include media-breakpoint-down(md) {
+			padding-bottom: 15px;
+			border-bottom: 1px none;
+		}
+	}
+	.h-search {
+		form {
+			position: relative;
+		}
+		.form-control {
+			padding: 0.5rem 1.1rem;
+			font-size: 0.9rem;
+			border: 1px solid var(--#{$prefix}gray-300);
+			border-radius: 3px;
+		}
+		.btn {
+			position: absolute;
+			top: 4px;
+			right: 4px;
+			padding: 0px 10px;
+			bottom: 4px;
+			margin: auto;
+			border: none;
+			color: var(--#{$prefix}dark);
+			font-size: 18px;
+			background: var(--#{$prefix}gray-200);
+			border-radius: 3px;
+		}
+		@include media-breakpoint-down(lg) {
+			position: absolute;
+			top: 100%;
+			background: var(--#{$prefix}white);
+			border-top: 1px solid var(--#{$prefix}gray-300);
+			z-index: 11;
+			form {
+				margin: 10px 0;
+			}
+			.form-control {
+				border: 1px solid var(--#{$prefix}gray-300);
+			}
+		}
+	}
+	@include media-breakpoint-up(lg) {
+		[data-cart-items]:before {
+		    top: -6px;
+			right: 2px;
+		}
+	}
+	.header-right {
+		@include media-breakpoint-down(md) {
+			padding-top: 15px;
+		}
+		.nav-item {
+			+ .nav-item {
+				padding-left: 12px;
+			}
+			> .nav-link {
+				padding: 0;
+			    width: 40px;
+			    height: 40px;
+			    display: inline-flex;
+			    align-items: center;
+			    justify-content: center;
+			    border: 1px solid var(--#{$prefix}gray-300);
+				color: var(--#{$prefix}dark);
+				border-radius: 3px;
+				i {
+				    font-size: 18px;
+					line-height: 1;
+				}
+				span {
+					font-size: 12px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+	.navbar-toggler {
+		border: none;
+	    background: no-repeat;
+	    height: 40px;
+	    width: 40px;
+	    position: relative;
+	    border: 1px solid var(--#{$prefix}gray-300);
+	    border-radius: 3px;
+	    span {
+	        background: var(--#{$prefix}dark);
+		    width: 60%;
+		    height: 2px;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    margin: auto;
+		    box-shadow: 0 8px 0 0 var(--#{$prefix}dark), 0 -8px 0 0 var(--#{$prefix}dark);
+	    }
+	}
+	.navbar-nav {
+		> .nav-item {
+			> .nav-link {
+				font-weight: $px-header-font-weight;
+				text-transform: $px-header-link-transform;
+				font-size: $px-header-link-font-size;
+			}
+			@include mob_menu_icon();
+		}
+	}
+	.navbar {
+		box-shadow: none !important;
+	}
+	.navbar-expand {
+        @each $breakpoint in map-keys($grid-breakpoints) {
+            $next: breakpoint-next($breakpoint, $grid-breakpoints);
+            $infix: breakpoint-infix($next, $grid-breakpoints);
+
+            // stylelint-disable-next-line scss/selector-no-union-class-name
+            &#{$infix} {
+                @include media-breakpoint-up($next) {
+                	.dropdown-menu {
+                		border-top: 1px solid var(--#{$prefix}gray-300);
+                	}
+                	.navbar-collapse {
+                		position: relative;
+                	}
+                    .navbar-nav {
+                        >.nav-item {
+                        	+ .nav-item {
+                        		margin-left: 20px;
+                        	}
+                        	&.vertical-dropdown {
+                        		background: var(--#{$prefix}primary);
+                        		>.nav-link {
+                        			color: var(--#{$prefix}white);
+                        			padding: 0 18px;
+                        		}
+                        	}
+                            >.nav-link {
+                                line-height: 45px;
+                                padding: 0;
+                                position: relative;
+                                font-size: 14px;
+                                font-weight: 500;
+                                &:before {
+                                	content: "";
+                                	position: absolute;
+                                	left: auto;
+	                                right: 0;
+                                	bottom: 0;
+                                	height: 2px;
+                                	width: 0px;
+                                	background: var(--#{$prefix}primary);
+                                	transition: ease width 0.35s;
+                                }
+                            }
+                            &:hover {
+                            	> .nav-link {
+                            		&:before {
+                            			left: 0;
+                                		right: auto;
+	                                	width: 100%;
+	                                }
+                            	}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

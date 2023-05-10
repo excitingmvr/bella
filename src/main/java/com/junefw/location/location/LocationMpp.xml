@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.location.location.LocationMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.location.location.Location"></resultMap>
+	
+	<sql id ="selectCommon">
+		FROM 
+			locnLocation a
+		WHERE 1=1
+			 AND a.ltltLat BETWEEN #{xltltLatStart} AND #{xltltLatEnd}
+			 AND a.ltltLng BETWEEN #{xltltLngStart} AND #{xltltLngEnd}
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.ltltDelNy = #{shDelNy}</if>
+<!-- 			
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+ -->			
+			<choose>
+				<when test="shOption == 1">AND a.ltltName LIKE CONCAT('%',#{shValue},'%')</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+		SELECT
+			a.ltltSeq
+			,a.ltltDefaultNy
+			,a.ltltName
+			,a.ltltEstDate
+			,a.ltltStartDate
+			,a.ltltCeo
+			,a.ltltEmail
+			,a.ltltPhone1
+			,a.ltltPhone2
+			,a.ltltTelecomCd
+			,a.ltltMobile
+			,a.ltltFax
+			,a.ltltZipcode
+			,a.ltltAddress1
+			,a.ltltAddress2
+			,a.ltltAddress3
+			,a.ltltLat
+			,a.ltltLng
+			,a.ltltUseNy
+			,a.ltltDesc
+			,a.ltltDelNy
+		<include refid="Base.selectRegModWithAlies" />
+		<include refid="selectCommon" />
+			ORDER BY a.ltltSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ltltSeq
+			,a.ltltDefaultNy
+			,a.ltltName
+			,a.ltltEstDate
+			,a.ltltStartDate
+			,a.ltltCeo
+			,a.ltltEmail
+			,a.ltltPhone1
+			,a.ltltPhone2
+			,a.ltltTelecomCd
+			,a.ltltMobile
+			,a.ltltFax
+			,a.ltltZipcode
+			,a.ltltAddress1
+			,a.ltltAddress2
+			,a.ltltAddress3
+			,a.ltltLat
+			,a.ltltLng
+			,a.ltltUseNy
+			,a.ltltDesc
+			,a.ltltDelNy
+			<include refid="Base.selectRegModWithAlies" />
+		FROM
+			locnLocation a
+		WHERE 1=1
+			AND a.ltltSeq = #{ltltSeq}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO locnLocation (
+			ltltDefaultNy
+			,ltltName
+			,ltltEstDate
+			,ltltStartDate
+			,ltltCeo
+			,ltltEmail
+			,ltltPhone1
+			,ltltPhone2
+			,ltltTelecomCd
+			,ltltMobile
+			,ltltFax
+			,ltltZipcode
+			,ltltAddress1
+			,ltltAddress2
+			,ltltAddress3
+			,ltltLat
+			,ltltLng
+			,ltltUseNy
+			,ltltDesc
+			,ltltDelNy
+			<include refid="Base.insertRegModColumn" />
+		)
+		VALUES (
+			#{ltltDefaultNy}
+			,#{ltltName}
+			<choose>
+				<when test="ltltEstDate.equals('')">,NULL</when>
+				<otherwise>,#{ltltEstDate}</otherwise>
+			</choose>
+			<choose>
+				<when test="ltltStartDate.equals('')">,NULL</when>
+				<otherwise>,#{ltltStartDate}</otherwise>
+			</choose>			
+			,#{ltltCeo}
+			,#{ltltEmail}
+			,#{ltltPhone1}
+			,#{ltltPhone2}
+			,#{ltltTelecomCd}
+			,#{ltltMobile}
+			,#{ltltFax}
+			,#{ltltZipcode}
+			,#{ltltAddress1}
+			,#{ltltAddress2}
+			,#{ltltAddress3}
+			,#{ltltLat}
+			,#{ltltLng}
+			,#{ltltUseNy}
+			,#{ltltDesc}
+			,0
+			<include refid="Base.insertRegModValue" />
+		)
+		 <selectKey resultType="String" keyProperty="ltltSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="update">
+		UPDATE locnLocation
+		SET
+			ltltDefaultNy = #{ltltDefaultNy}
+			,ltltName = #{ltltName}
+			,ltltEstDate = 
+				<choose>
+					<when test="ltltEstDate.equals('')">NULL</when>
+					<otherwise>#{ltltEstDate}</otherwise>
+				</choose>
+			,ltltStartDate = 
+				<choose>
+					<when test="ltltStartDate.equals('')">NULL</when>
+					<otherwise>#{ltltStartDate}</otherwise>
+				</choose>
+			,ltltCeo = #{ltltCeo}
+			,ltltEmail = #{ltltEmail}
+			,ltltPhone1 = #{ltltPhone1}
+			,ltltPhone2 = #{ltltPhone2}
+			,ltltTelecomCd = #{ltltTelecomCd}
+			,ltltMobile = #{ltltMobile}
+			,ltltFax = #{ltltFax}
+			,ltltZipcode = #{ltltZipcode}
+			,ltltAddress1 = #{ltltAddress1}
+			,ltltAddress2 = #{ltltAddress2}
+			,ltltAddress3 = #{ltltAddress3}
+			,ltltLat = #{ltltLat}
+			,ltltLng = #{ltltLng}
+			,ltltUseNy = #{ltltUseNy}
+			,ltltDesc = #{ltltDesc}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ltltSeq = #{ltltSeq}
+	</update>
+	
+	
+	<update id="uelete">
+		UPDATE locnLocation
+		SET
+			ltltDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND ltltSeq = #{ltltSeq}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM locnLocation 
+		WHERE 1=1
+			AND ltltSeq = #{ltltSeq}
+	</delete>
+
+	
+</mapper>
+
+
+
