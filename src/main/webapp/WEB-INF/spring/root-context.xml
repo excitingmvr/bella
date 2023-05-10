@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- mariadb s 2022.02.15 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="driverClassName" value="org.mariadb.jdbc.Driver" /> -->	<!-- log4j2로 디비 로그를 찍기 위하여 아래 내용으로 변경 -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<!-- <property name="url" value="jdbc:mariadb://rds-inst-1.cqrisz1cmtkf.ap-northeast-2.rds.amazonaws.com:33062/nct" /> -->	<!-- log4j2로 디비 로그를 찍기 위하여 아래 내용으로 변경 -->
+<!-- 
+		<property name="url" value="jdbc:log4jdbc:mariadb://sj-maria-1.cvnd1cw1haiu.ap-northeast-2.rds.amazonaws.com:33062/nct" />
+		<property name="username" value="sjmrdmin" />
+		<property name="password" value="Thwjsj11!!" />
+-->
+		<property name="url" value="jdbc:log4jdbc:mariadb://training.cuwa75uqxtbd.ap-northeast-2.rds.amazonaws.com:33062/nct" />
+		<property name="username" value="jmapia" />
+		<property name="password" value="2z2nB1nary!!" />		
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<!-- <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" /> -->	<!-- 기본설정 : 패키지 변경으로 아래와 같이 수정 -->
+		<!-- <property name="mapperLocations" value="classpath:com/junefw/infra/**/**/*Mpp.xml"/> -->	<!-- 매퍼여러개 추가를 위해서 아래 내용으로 수정 -->
+		<property name="mapperLocations">
+			<list>
+		 		<value>classpath:com/junefw/common/**/*Mpp.xml</value>
+		 		<value>classpath:com/junefw/infra/**/*Mpp.xml</value>
+		 		<value>classpath:com/junefw/location/**/*Mpp.xml</value>
+		 		<value>classpath:com/junefw/mallbicycle/**/*Mpp.xml</value>
+		 		<value>classpath:com/junefw/test/**/*Mpp.xml</value>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<!-- mariadb e 2022.02.15 -->
+
+	<!-- transaction s 2022.03.06 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	  
+	<aop:config>
+		<aop:pointcut id="transactionGeneralPointCut" expression="execution(* com.junefw.infra.modules..*Service.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionGeneralPointCut"/>
+	</aop:config>
+	  
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="uelete*" propagation="REQUIRED" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException"/>
+			<tx:method name="*" read-only="true" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- transaction e 2022.03.06 -->
+		
+</beans>
