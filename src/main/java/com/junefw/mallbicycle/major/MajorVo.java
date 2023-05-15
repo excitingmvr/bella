@@ -8,6 +8,9 @@ public class MajorVo extends BaseVo implements Serializable{
 
 	private static final long serialVersionUID = 6917685060203569570L;
 	
+	private String sessUsrSeq;
+	private String sessXdmSeq;
+	
 	private String mbmgSeq;
 	private String mbmtSeq;
 	private String mbmfSeq;
@@ -36,6 +39,18 @@ public class MajorVo extends BaseVo implements Serializable{
 	private Integer shDistrict4;
 	private String shDistrictDetail;
 //	----------
+	public String getSessUsrSeq() {
+		return sessUsrSeq;
+	}
+	public void setSessUsrSeq(String sessUsrSeq) {
+		this.sessUsrSeq = sessUsrSeq;
+	}
+	public String getSessXdmSeq() {
+		return sessXdmSeq;
+	}
+	public void setSessXdmSeq(String sessXdmSeq) {
+		this.sessXdmSeq = sessXdmSeq;
+	}
 	public String getMbmgSeq() {
 		return mbmgSeq;
 	}

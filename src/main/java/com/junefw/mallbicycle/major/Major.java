@@ -54,7 +54,9 @@ public class Major extends Base implements Serializable{
 	private Integer mbmhDefaultNy;
 //	private String mbmtSeq;
 //	private String ifmmSeq;	
+	
 	private Integer xMajorHitCount;
+	private Integer xMajorMyFavoriteCount;
 //	-----
 	public String getMbmgSeq() {
 		return mbmgSeq;
@@ -277,6 +279,12 @@ public class Major extends Base implements Serializable{
 	}
 	public void setxMajorHitCount(Integer xMajorHitCount) {
 		this.xMajorHitCount = xMajorHitCount;
+	}
+	public Integer getxMajorMyFavoriteCount() {
+		return xMajorMyFavoriteCount;
+	}
+	public void setxMajorMyFavoriteCount(Integer xMajorMyFavoriteCount) {
+		this.xMajorMyFavoriteCount = xMajorMyFavoriteCount;
 	}
 	
 }

@@ -538,6 +538,7 @@
 						) aaa
 					) AS xMajorHitCount			
 				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount
 		<include refid="selectCommonMajorShow" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
