@@ -66,9 +66,11 @@
                     <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary">
                         <i class="fi-eye"></i>
                     </a>
-					<a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary">
+<%-- <c:if test="${ xMajorMyFavoriteCount eq 0 && not empty sessUsrSeq }"> --%>         
+					<a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary" id="aaa">
                         <i class="bi bi-bookmark"></i>
                     </a>                    
+<%-- </c:if> --%>                    
                 </div>
                 <div class="product-media">
                     <a href="#">
@@ -140,3 +142,30 @@
 	    </div>
 	</div>
 	<!-- End Paging -->
+
+<div class="modal fade" id="modalConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				body
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"><i class="fa-solid fa-angle-left"></i></button>
+				<button type="button" class="btn btn-danger btn-sm" name="" id="btnModalDelete"><i class="fa-solid fa-x"></i></button>
+				<button type="button" class="btn btn-danger btn-sm" name="" id="btnModalUelete"><i class="far fa-trash-alt"></i></button>
+			</div>
+		</div>
+	</div>
+</div>  
+	
+<script>
+	$("#aaa").on("click", function(){
+ 		$("#modalConfirm").modal("show");
+ 		
+	});
+
+</script>	

@@ -103,8 +103,8 @@
         
 <!-- includeUsrFooter s -->
 <%@include file="../../include/includeUsrFooter.jsp"%>
-<!-- includeUsrFooter e -->          
-        
+<!-- includeUsrFooter e -->       
+
     </div>
     <!-- 
     ========================
@@ -313,6 +313,12 @@
 			}
 		}		
 	}
+	
+	
+ 	$("#aaa").on("click", function(){
+ 		/* $("#modalConfirm").modal("show"); */
+ 		alert("asdfasdf");
+	});
  	
 </script>
 
