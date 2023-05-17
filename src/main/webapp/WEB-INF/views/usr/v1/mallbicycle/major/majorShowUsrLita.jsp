@@ -66,11 +66,9 @@
                     <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary">
                         <i class="fi-eye"></i>
                     </a>
-<%-- <c:if test="${ xMajorMyFavoriteCount eq 0 && not empty sessUsrSeq }"> --%>         
-					<a href="javascript:void(0)" class="btn btn-outline-primary" id="btnFavocite">
+					<a href="javascript:addFavorite(<c:out value="${list.xMajorMyFavoriteCount }"/>)" class="btn btn-outline-primary">
                         <i class="bi bi-bookmark"></i>
                     </a>
-<%-- </c:if> --%>                    
                 </div>
                 <div class="product-media">
                     <a href="#">
@@ -170,15 +168,24 @@
 </div>  
 	
 <script>
-	$("#btnFavocite").on("click", function(){
-		$("#modalConfirmTitle").text("즐겨찾기");
-		$("#modalConfirmBody").text("로그인 후 이용가능한 서비스 입니다.");
-		
-//  		$("#modalConfirmFooter *").remove();
-// 		$("#modalConfirmFooter").append(buttons);
+	
+	addFavorite = function(xMajorMyFavoriteCountJs) {
+		var sessUsrSeqJs = '<c:out value="${sessUsrSeq}"/>';
 
-		$("#modalConfirm").modal("show");
- 		
-	});
+		$("#modalConfirmTitle").text("즐겨찾기");
+		
+		if (sessUsrSeqJs) {
+			if(xMajorMyFavoriteCountJs == 1) {
+				$("#modalConfirmBody").text("이미 등록이 되어 있습니다.");
+				$("#modalConfirm").modal("show");
+			} else {
+				// by pas
+			}
+		} else {
+			$("#modalConfirmBody").text("로그인 후 이용가능한 서비스 입니다.");
+			$("#modalConfirm").modal("show");
+		}
+	}
+	
 
 </script>	
