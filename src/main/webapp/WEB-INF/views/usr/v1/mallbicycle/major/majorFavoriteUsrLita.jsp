@@ -64,8 +64,8 @@
             </div>
             <div class="product-card-info">
                 <div class="product-meta">
-                    <i class="bi bi-hand-index-fill"></i> 998&nbsp;&nbsp;
-                    <i class="bi bi-bookmark-fill"></i> 224&nbsp;&nbsp;
+                    <i class="bi bi-hand-index-fill"></i> <c:out value="${list.xMajorHitCount }"/>&nbsp;&nbsp;
+                    <i class="bi bi-bookmark-fill"></i> <c:out value="${list.xMajorFavoriteCount }"/>&nbsp;&nbsp;
                     <i class="bi bi-geo-alt-fill"></i>
                     <c:forEach items="${listCategory}" var="itemCategory" varStatus="statusCategory">
 						<c:if test="${list.mbtdDistrictCt eq itemCategory.ifctSeq}"><c:out value="${itemCategory.ifctName }"/></c:if>

@@ -332,6 +332,7 @@
 		    LEFT JOIN mbccMajorGoods c on c.mbmgSeq = b.mbmgSeq
 			LEFT JOIN mbccMajorTradeDistrict d on d.mbmtSeq = b.mbmtSeq AND d.mbtdDefaultNy = 1		    
 		WHERE 1=1
+			AND a.ifmmSeq = #{sessUsrSeq}
 			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmfDelNy = #{shDelNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -373,7 +374,14 @@
 				,d.mbtdDistrict3Ct
 				,d.mbtdDistrict4Ct
 				,d.mbtdDistrictDetail
-				,d.mbtdDelNy	
+				,d.mbtdDelNy
+				,(SELECT count(*) 
+					FROM (
+							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+						) aaa
+					) AS xMajorHitCount			
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
 		<include refid="selectCommonMajorFavorite" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />

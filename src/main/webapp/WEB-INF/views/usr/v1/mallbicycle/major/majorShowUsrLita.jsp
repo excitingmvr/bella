@@ -179,7 +179,7 @@
 				$("#modalConfirmBody").text("이미 등록이 되어 있습니다.");
 				$("#modalConfirm").modal("show");
 			} else {
-				// by pas
+				// by pass
 			}
 		} else {
 			$("#modalConfirmBody").text("로그인 후 이용가능한 서비스 입니다.");

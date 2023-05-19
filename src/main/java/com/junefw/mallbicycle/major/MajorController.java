@@ -130,9 +130,11 @@ public class MajorController extends BaseController{
 	
 	
 	@RequestMapping(value = "/majorFavoriteUsrLita")
-	public String majorFavoriteUsrLita(@ModelAttribute("vo") MajorVo vo, Model model) throws Exception {
+	public String majorFavoriteUsrLita(@ModelAttribute("vo") MajorVo vo, HttpSession httpSession, Model model) throws Exception {
 		
-		vo.setParamsPaging(service.selectOneCountMajorGoods(vo));
+		setSearch(vo);
+		vo.setSessUsrSeq((String) httpSession.getAttribute("sessUsrSeq"));
+		vo.setParamsPaging(service.selectOneCountMajorFavorite(vo));
 		
 		if (vo.getTotalRows() > 0) {
 			List<Major> list = service.selectListMajorFavorite(vo);
