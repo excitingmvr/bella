@@ -287,13 +287,13 @@
 
 	var urlCommon = "/v1/mallbicycle/major/";						/* #-> */
 	
-	var goUrlList = urlCommon + "majorGoodsUsrAjaxList";		/* #-> */
-	var goUrlInst = urlCommon + "majorGoodsUsrInst"; 			/* #-> */
-	var goUrlUpdt = urlCommon + "majorGoodsUsrUpdt";			/* #-> */
-	var goUrlUele = urlCommon + "majorGoodsUsrUele";			/* #-> */
-	var goUrlDele = urlCommon + "majorGoodsUsrDele";			/* #-> */
+	var goUrlAjaxList = urlCommon + "majorGoodsUsrAjaxList";		/* #-> */
+	var goUrlInst = urlCommon + "majorGoodsUsrInst"; 				/* #-> */
+	var goUrlUpdt = urlCommon + "majorGoodsUsrUpdt";				/* #-> */
+	var goUrlUele = urlCommon + "majorGoodsUsrUele";				/* #-> */
+	var goUrlDele = urlCommon + "majorGoodsUsrDele";				/* #-> */
 	
-	var seq = $("input:hidden[name=mbmgSeq]"); 					/* #-> */
+	var seq = $("input:hidden[name=mbmgSeq]"); 						/* #-> */
 	
 </script>
 

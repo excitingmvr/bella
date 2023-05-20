@@ -221,8 +221,8 @@
 									<span class="text-primary"><fmt:formatNumber value="${item.mbmtPrice }" pattern="#,###" /></span>
 								</div>
 								<div class="product-meta">
-				                    <i class="bi bi-hand-index-fill"></i> 998&nbsp;&nbsp;
-				                    <i class="bi bi-bookmark-fill"></i> 224&nbsp;&nbsp;
+				                    <i class="bi bi-hand-index-fill"></i> <c:out value="${item.xMajorHitCount }"/>&nbsp;&nbsp;
+				                    <i class="bi bi-bookmark-fill"></i> <c:out value="${item.xMajorFavoriteCount }"/>&nbsp;&nbsp;
 				                    <i class="bi bi-geo-alt-fill"></i>
 				                    <c:forEach items="${listCategory}" var="itemCategory" varStatus="statusCategory">
 										<c:if test="${item.mbtdDistrictCt eq itemCategory.ifctSeq}"><c:out value="${itemCategory.ifctName }"/></c:if>
@@ -765,13 +765,13 @@
 
 	var urlCommon = "/v1/mallbicycle/major/";						/* #-> */
 	
-	var goUrlList = urlCommon + "majorFavoriteUsrAjaxList";		/* #-> */
+	var goUrlAjaxList = urlCommon + "majorFavoriteUsrAjaxList";		/* #-> */
 	var goUrlInst = urlCommon + "majorFavoriteUsrInst"; 			/* #-> */
-	var goUrlUpdt = urlCommon + "majorFavoriteUsrUpdt";			/* #-> */
-	var goUrlUele = urlCommon + "majorFavoriteUsrUele";			/* #-> */
-	var goUrlDele = urlCommon + "majorFavoriteUsrDele";			/* #-> */
+	var goUrlUpdt = urlCommon + "majorFavoriteUsrUpdt";				/* #-> */
+	var goUrlUele = urlCommon + "majorFavoriteUsrUele";				/* #-> */
+	var goUrlDele = urlCommon + "majorFavoriteUsrDele";				/* #-> */
 	
-	var seq = $("input:hidden[name=mbmfSeq]"); 					/* #-> */
+	var seq = $("input:hidden[name=mbmfSeq]"); 						/* #-> */
 	
 </script>
 

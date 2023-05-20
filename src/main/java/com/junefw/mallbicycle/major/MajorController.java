@@ -89,8 +89,10 @@ public class MajorController extends BaseController{
 	
 	
 	@RequestMapping(value = "/majorTradeUsrLita")
-	public String majorTradeUsrLita(@ModelAttribute("vo") MajorVo vo, Model model) throws Exception {
+	public String majorTradeUsrLita(@ModelAttribute("vo") MajorVo vo, HttpSession httpSession, Model model) throws Exception {
 		
+		setSearch(vo);
+		vo.setSessUsrSeq((String) httpSession.getAttribute("sessUsrSeq"));
 		vo.setParamsPaging(service.selectOneCountMajorTrade(vo));
 		
 		if (vo.getTotalRows() > 0) {

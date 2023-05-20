@@ -175,6 +175,7 @@
 			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
 			LEFT JOIN mbccMajorTradeDistrict c on c.mbmtSeq = a.mbmtSeq AND c.mbtdDefaultNy = 1			
 		WHERE 1=1
+			AND b.ifmmSeq = #{sessUsrSeq}
 			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmtDelNy = #{shDelNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -213,7 +214,14 @@
 				,c.mbtdDistrict3Ct
 				,c.mbtdDistrict4Ct
 				,c.mbtdDistrictDetail
-				,c.mbtdDelNy				
+				,c.mbtdDelNy
+				,(SELECT count(*) 
+					FROM (
+							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+						) aaa
+					) AS xMajorHitCount			
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount											
 		<include refid="selectCommonMajorTrade" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
@@ -259,6 +267,13 @@
 			,c.mbtdDistrict4Ct
 			,c.mbtdDistrictDetail
 			,c.mbtdDelNy
+			,(SELECT count(*) 
+				FROM (
+						SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+					) aaa
+				) AS xMajorHitCount			
+			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
 		FROM
 			mbccMajorTrade a
 			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
@@ -427,7 +442,14 @@
 				,d.mbtdDistrict3Ct
 				,d.mbtdDistrict4Ct
 				,d.mbtdDistrictDetail
-				,d.mbtdDelNy	
+				,d.mbtdDelNy
+				,(SELECT count(*) 
+					FROM (
+							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+						) aaa
+					) AS xMajorHitCount			
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
 		FROM
 			mbccMajorFavorite a
 		    LEFT JOIN mbccMajorTrade b on b.mbmtSeq = a.mbmtSeq
