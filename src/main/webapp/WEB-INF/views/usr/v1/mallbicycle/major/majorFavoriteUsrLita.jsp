@@ -47,6 +47,11 @@
                 <div class="badge-ribbon">
                     <span class="badge bg-danger">Today</span>
                 </div>
+                <div class="product-action">
+					<a href="javascript:uleteFavorite(<c:out value="${list.mbmfSeq }"/>)" class="btn btn-outline-primary">
+                        <i class="bi bi-bookmark"></i>
+                    </a>
+                </div>                
                 <div class="product-media">
                     <a href="#">
                         <img class="img-fluid" src="/resources/usr/v1/image/mall/product/1000x1000.jpg" title="" alt="">
@@ -125,3 +130,19 @@
 	</div>
 	<!-- End Paging -->                              
 </div>
+
+<!-- includeUsrModal s -->
+<%@include file="../../include/includeUsrModal.jsp"%>
+<!-- includeUsrModal e -->  
+
+<script>
+	uleteFavorite = function(seq) {
+	
+		$("#modalConfirmTitle").text("즐겨찾기");
+		
+		$("#modalConfirmBody").text("삭제 하시겠습니까?");
+		$("#modalConfirm").modal("show");
+		
+	}
+	
+</script>

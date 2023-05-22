@@ -129,14 +129,14 @@
 	}); 
 	
 	
-	var urlCommon = "/v1/mallbicycle/major/";
+	var urlCommon = "/v1/mallbicycle/major/";								/* #-> */
 	
 	var goUrlAjaxList = urlCommon + "majorFavoriteUsrAjaxList";				/* #-> */
 	var goUrlLita = urlCommon + "majorFavoriteUsrLita";						/* #-> */
 	var goUrlForm = urlCommon + "majorFavoriteUsrForm";						/* #-> */
 	var goUrlView = urlCommon + "majorFavoriteUsrView";						/* #-> */
-	var goUrlMultiUele = urlCommon + "majorFavoriteUsrMultiUele";				/* #-> */
-	var goUrlMultiDele = urlCommon + "majorFavoriteUsrMultiDele";				/* #-> */
+	var goUrlMultiUele = urlCommon + "majorFavoriteUsrMultiUele";			/* #-> */
+	var goUrlMultiDele = urlCommon + "majorFavoriteUsrMultiDele";			/* #-> */
 	
 	var excelUri = urlCommon + "excelDownload";								/* #-> */
 	
