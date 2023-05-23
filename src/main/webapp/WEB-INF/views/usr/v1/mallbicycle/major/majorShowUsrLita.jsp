@@ -162,9 +162,16 @@
 			}
 		} else {
 			$("#modalAlertBody").text("로그인 후 이용가능한 서비스 입니다.");
+			
+			$("#btnMoveToLogin").remove();
+			$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" name="" id="btnMoveToLogin">Login</button>');
 			$("#modalAlert").modal("show");
 		}
 	}
 	
 
+
+ 	
+
+	
 </script>	

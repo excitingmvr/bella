@@ -314,11 +314,13 @@
 		}		
 	}
 	
+
 	
- 	$("#aaa").on("click", function(){
- 		/* $("#modalConfirm").modal("show"); */
- 		alert("asdfasdf");
-	});
+	
+//  	$("#aaa").on("click", function(){
+//  		/* $("#modalConfirm").modal("show"); */
+//  		alert("asdfasdf");
+// 	});
  	
 </script>
 
