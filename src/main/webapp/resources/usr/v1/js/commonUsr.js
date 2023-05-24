@@ -43,7 +43,18 @@ $("#btnLogout").on("click", function(){
 	});
 });
 
+
 /*문자열 특정 자리수 치환*/
 var replaceAt = function(input, index, character){
     return input.substr(0, index) + character + input.substr(index+character.length);
+}
+
+
+goLogin = function(){
+	location.href = URL_USR_LOGIN_FORM;
+}
+
+
+goIndex = function(){
+	location.href = URL_USR_INDEX_VIEW;
 }

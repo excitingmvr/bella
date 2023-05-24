@@ -141,9 +141,6 @@
 	</div>
 	<!-- End Paging -->
 
-<!-- includeUsrModal s -->
-<%@include file="../../include/includeUsrModal.jsp"%>
-<!-- includeUsrModal e -->  
 	
 <script>
 	
@@ -155,23 +152,32 @@
 		if (sessUsrSeqJs) {
 			if(xMajorMyFavoriteCountJs == 1) {
 				$("#modalAlertBody").text("이미 등록이 되어 있습니다.");
+				
+				$("#btnMoveToLogin").remove();
+				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');
+				
 				$("#modalAlert").modal("show");
 			} else {
-				$("#modalConfirmBody").text("즐겨찾기에 등록이 되었습니다.");
-				$("#modalConfirm").modal("show");
+				$("#modalAlertBody").text("즐겨찾기에 등록이 되었습니다.");
+			
+				$("#btnMoveToLogin").remove();
+				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');				
+				
+				$("#modalAlert").modal("show");
 			}
 		} else {
 			$("#modalAlertBody").text("로그인 후 이용가능한 서비스 입니다.");
 			
 			$("#btnMoveToLogin").remove();
-			$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" name="" id="btnMoveToLogin">Login</button>');
+			$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goLogin();">Login</button>');
+			
 			$("#modalAlert").modal("show");
 		}
 	}
 	
-
-
- 	
-
+	
+	goFavorite = function() {
+		location.href = "/v1/mallbicycle/major/majorFavoriteUsrAjaxList";
+	}
 	
 </script>	

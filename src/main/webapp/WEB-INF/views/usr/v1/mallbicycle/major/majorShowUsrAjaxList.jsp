@@ -112,6 +112,10 @@
     ========================
     -->
 
+<!-- includeUsrModal s -->
+<%@include file="../../include/includeUsrModal.jsp"%>
+<!-- includeUsrModal e -->  
+
 <!-- includeUsrLinkJs s -->
 <%@include file="../../include/includeUsrLinkJs.jsp"%>
 <!-- includeUsrLinkJs e -->
@@ -314,14 +318,6 @@
 		}		
 	}
 	
-
-	
-	
-//  	$("#aaa").on("click", function(){
-//  		/* $("#modalConfirm").modal("show"); */
-//  		alert("asdfasdf");
-// 	});
- 	
 </script>
 
 </body>
