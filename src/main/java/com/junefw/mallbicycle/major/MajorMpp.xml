@@ -464,7 +464,7 @@
 		INSERT INTO mbccMajorFavorite (
 			mbmfDelNy
 			<include refid="Base.insertRegModColumn" />
-			,mbmtSeq,
+			,mbmtSeq
 			,ifmmSeq
 		)
 		VALUES (
@@ -620,8 +620,9 @@
 				FROM (
 						SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 					) aaa
-				) AS xMajorHitCount			
+				) AS xMajorHitCount		
 			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
 		FROM
 			mbccMajorTrade a
 			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq

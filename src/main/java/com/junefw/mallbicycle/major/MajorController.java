@@ -1,6 +1,8 @@
 package com.junefw.mallbicycle.major;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.junefw.common.base.BaseController;
 import com.junefw.common.util.UtilDateTime;
@@ -163,6 +166,21 @@ public class MajorController extends BaseController{
 		return pathUsrCommon + "majorFavoriteUsrForm";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/majorFavoriteUsrInst")
+	public Map<String, Object> majorFavoriteUsrInst(Major dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.insertMajorFavorite(dto);
+
+		if (result > 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
 	
 //	show
 	@RequestMapping(value = "/majorShowUsrAjaxList")
@@ -197,6 +215,7 @@ public class MajorController extends BaseController{
 		dto.setIfmmSeq((String) httpSession.getAttribute("sessUsrSeq"));
 		service.insertMajorHit(dto);
 		
+		vo.setSessUsrSeq((String) httpSession.getAttribute("sessUsrSeq"));
 		Major item = service.selectOneMajorShow(vo);
 		model.addAttribute("item", item);
 		

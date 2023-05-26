@@ -208,7 +208,7 @@
 											</label>
 										</div>
 										<div class="form-check radio-text form-check-inline me-2" id="btnFavorite">
-											<label class="radio-text-label" for="s2">
+											<label class="radio-text-label" for="s2" onclick='addFavorite(<c:out value="${item.xMajorMyFavoriteCount }"/>)'>
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
 													<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
 												</svg>
@@ -749,6 +749,10 @@
        End Wrapper 
     ========================
     -->
+
+<!-- includeUsrModal s -->
+<%@include file="../../include/includeUsrModal.jsp"%>
+<!-- includeUsrModal e --> 
     
 <!-- includeUsrLinkJs s -->
 <%@include file="../../include/includeUsrLinkJs.jsp"%>
@@ -771,6 +775,65 @@
 	var goUrlDele = urlCommon + "majorShowUsrDele";			/* #-> */
 	
 	var seq = $("input:hidden[name=mbmtSeq]"); 					/* #-> */
+	
+	var checkMajorMyFavoriteCountJs = 0;
+	
+	addFavorite = function(xMajorMyFavoriteCountJs) {
+		var sessUsrSeqJs = '<c:out value="${sessUsrSeq}"/>';
+		var mbmtSeqJs = '<c:out value="${item.mbmtSeq}"/>';
+
+		$("#modalAlertTitle").text("즐겨찾기");
+		
+		if (sessUsrSeqJs) {
+			if(xMajorMyFavoriteCountJs == 0 && checkMajorMyFavoriteCountJs == 0) {
+				$.ajax({
+					async: true 
+					,cache: false
+					,type: "post"
+					/* ,dataType:"json" */
+					,url: "/v1/mallbicycle/major/majorFavoriteUsrInst"
+					/* ,data : $("#formLogin").serialize() */
+					,data : { "ifmmSeq" : sessUsrSeqJs, "mbmtSeq" : mbmtSeqJs}
+					,success: function(response) {
+						if(response.rt == "success") {
+							// success
+							checkMajorMyFavoriteCountJs++;
+						} else {
+							// by pass
+						}
+					}
+					,error : function(jqXHR, textStatus, errorThrown){
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+				
+				$("#modalAlertBody").text("즐겨찾기에 등록이 되었습니다.");
+				$("#btnMoveToLogin").remove();
+				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');				
+				
+				$("#modalAlert").modal("show");
+			} else {
+				$("#modalAlertBody").text("이미 등록이 되어 있습니다.");
+				
+				$("#btnMoveToLogin").remove();
+				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');
+				
+				$("#modalAlert").modal("show");
+			}
+		} else {
+			$("#modalAlertBody").text("로그인 후 이용가능한 서비스 입니다.");
+			
+			$("#btnMoveToLogin").remove();
+			$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goLogin();">Login</button>');
+			
+			$("#modalAlert").modal("show");
+		}
+	}
+	
+	
+	goFavorite = function() {
+		location.href = "/v1/mallbicycle/major/majorFavoriteUsrAjaxList";
+	}
 	
 </script>
 

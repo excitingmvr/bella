@@ -66,7 +66,7 @@
                     <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary">
                         <i class="fi-eye"></i>
                     </a>
-					<a href="javascript:addFavorite(<c:out value="${list.xMajorMyFavoriteCount }"/>)" class="btn btn-outline-primary">
+					<a href="javascript:addFavorite(<c:out value="${list.xMajorMyFavoriteCount }"/>, <c:out value="${list.mbmtSeq }"/>)" class="btn btn-outline-primary">
                         <i class="bi bi-bookmark"></i>
                     </a>
                 </div>
@@ -143,25 +143,47 @@
 
 	
 <script>
-	
-	addFavorite = function(xMajorMyFavoriteCountJs) {
+
+	var checkMajorMyFavoriteCountJs = 0;
+
+	addFavorite = function(xMajorMyFavoriteCountJs, mbmtSeqJs) {
 		var sessUsrSeqJs = '<c:out value="${sessUsrSeq}"/>';
 
 		$("#modalAlertTitle").text("즐겨찾기");
 		
 		if (sessUsrSeqJs) {
-			if(xMajorMyFavoriteCountJs == 1) {
+			if(xMajorMyFavoriteCountJs == 0 && checkMajorMyFavoriteCountJs == 0) {
+				$.ajax({
+					async: true 
+					,cache: false
+					,type: "post"
+					/* ,dataType:"json" */
+					,url: "/v1/mallbicycle/major/majorFavoriteUsrInst"
+					/* ,data : $("#formLogin").serialize() */
+					,data : { "ifmmSeq" : sessUsrSeqJs, "mbmtSeq" : mbmtSeqJs}
+					,success: function(response) {
+						if(response.rt == "success") {
+							// success
+							checkMajorMyFavoriteCountJs++;
+						} else {
+							// by pass
+						}
+					}
+					,error : function(jqXHR, textStatus, errorThrown){
+						alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+					}
+				});
+				
+				$("#modalAlertBody").text("즐겨찾기에 등록이 되었습니다.");
+				$("#btnMoveToLogin").remove();
+				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');				
+				
+				$("#modalAlert").modal("show");
+			} else {
 				$("#modalAlertBody").text("이미 등록이 되어 있습니다.");
 				
 				$("#btnMoveToLogin").remove();
 				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');
-				
-				$("#modalAlert").modal("show");
-			} else {
-				$("#modalAlertBody").text("즐겨찾기에 등록이 되었습니다.");
-			
-				$("#btnMoveToLogin").remove();
-				$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goFavorite();">즐겨찾기</button>');				
 				
 				$("#modalAlert").modal("show");
 			}
