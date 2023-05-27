@@ -160,12 +160,6 @@ public class MajorController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value = "/majorFavoriteUsrForm")
-	public String majorFavoriteUsrForm() throws Exception {
-		
-		return pathUsrCommon + "majorFavoriteUsrForm";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/majorFavoriteUsrInst")
 	public Map<String, Object> majorFavoriteUsrInst(Major dto) throws Exception {
@@ -181,6 +175,21 @@ public class MajorController extends BaseController{
 		return returnMap;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/majorFavoriteUsrUele")
+	public Map<String, Object> majorFavoriteUsrUele(Major dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.ueleteMajorFavorite(dto);
+
+		if (result > 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
 	
 //	show
 	@RequestMapping(value = "/majorShowUsrAjaxList")

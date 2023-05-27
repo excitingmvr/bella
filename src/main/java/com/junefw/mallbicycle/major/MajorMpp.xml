@@ -220,8 +220,8 @@
 							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 						) aaa
 					) AS xMajorHitCount			
-				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount											
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount											
 		<include refid="selectCommonMajorTrade" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
@@ -272,8 +272,8 @@
 						SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 					) aaa
 				) AS xMajorHitCount			
-			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
+			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
 		FROM
 			mbccMajorTrade a
 			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
@@ -395,8 +395,8 @@
 							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 						) aaa
 					) AS xMajorHitCount			
-				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
 		<include refid="selectCommonMajorFavorite" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
@@ -448,8 +448,8 @@
 							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 						) aaa
 					) AS xMajorHitCount			
-				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount				
 		FROM
 			mbccMajorFavorite a
 		    LEFT JOIN mbccMajorTrade b on b.mbmtSeq = a.mbmtSeq
@@ -567,8 +567,8 @@
 							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 						) aaa
 					) AS xMajorHitCount			
-				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0  AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount
 		<include refid="selectCommonMajorShow" />
 			ORDER BY a.mbmtSeq DESC
 			<include refid="Base.orderByLimitForMysql" />
@@ -621,8 +621,8 @@
 						SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
 					) aaa
 				) AS xMajorHitCount		
-			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
-			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
+			,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0  AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+			,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount			
 		FROM
 			mbccMajorTrade a
 			LEFT JOIN mbccMajorGoods b on b.mbmgSeq = a.mbmgSeq
