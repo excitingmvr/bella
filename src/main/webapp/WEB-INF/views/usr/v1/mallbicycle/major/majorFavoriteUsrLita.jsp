@@ -139,40 +139,24 @@
 
 <script>
 
-	uleteFavorite = function(seq) {
+	uleteFavorite = function(mbmfSeqJs) {
 		
 		$("#modalAlertTitle").text("즐겨찾기");
 	
 		$("#modalAlertBody").text("삭제 하시겠습니까?");
 		$("#btnUele").remove();
-		$("#modalAlertFooter").append('<button type="button" class="btn btn-danger btn-sm" id="btnUele" onclick="goFavoriteUele('+seq+');">삭제</button>');				
+		$("#modalAlertFooter").append('<button type="button" class="btn btn-danger btn-sm" id="btnUele" onclick="goFavoriteUele('+mbmfSeqJs+');">삭제</button>');				
 		
 		$("#modalAlert").modal("show");
 		
 	}
 	
-	goFavoriteUele = function(seq) {
-		$.ajax({
-			async: true 
-			,cache: false
-			,type: "post"
-			/* ,dataType:"json" */
-			,url: "/v1/mallbicycle/major/majorFavoriteUsrUele"
-			/* ,data : $("#formLogin").serialize() */
-			,data : { "mbmfSeq" : seq}
-			,success: function(response) {
-				if(response.rt == "success") {
-					// success
-					location.reload();
-					$("#modalAlert").modal("hide");
-				} else {
-					// by pass
-				}
-			}
-			,error : function(jqXHR, textStatus, errorThrown){
-				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-			}
-		});
+	
+	goFavoriteUele = function(mbmfSeqJs) {
+		
+		$("input:hidden[name=mbmfSeq]").val(mbmfSeqJs);
+		$("#modalAlert").modal("hide");
+		form.attr("action", goUrlUele).submit();
 	}
 	
 </script>

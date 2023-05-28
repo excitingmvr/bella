@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.common.base.BaseController;
 import com.junefw.common.util.UtilDateTime;
@@ -175,21 +176,18 @@ public class MajorController extends BaseController{
 		return returnMap;
 	}
 	
-	
-	@ResponseBody
-	@RequestMapping(value = "/majorFavoriteUsrUele")
-	public Map<String, Object> majorFavoriteUsrUele(Major dto) throws Exception {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		
-		int result = service.ueleteMajorFavorite(dto);
 
-		if (result > 0) {
-			returnMap.put("rt", "success");
-		} else {
-			returnMap.put("rt", "fail");
-		}
-		return returnMap;
+	@RequestMapping(value = "majorFavoriteUsrUele")
+	public String majorFavoriteUsrUele(MajorVo vo, Major dto, RedirectAttributes redirectAttributes, HttpSession httpSession) throws Exception {
+		
+		dto.setMbmfSeq(vo.getMbmfSeq());
+		service.ueleteMajorFavorite(dto);
+
+		redirectAttributes.addFlashAttribute("vo", vo);
+
+		return pathRedirectCommon + "majorFavoriteUsrAjaxList";
 	}
+	
 	
 //	show
 	@RequestMapping(value = "/majorShowUsrAjaxList")

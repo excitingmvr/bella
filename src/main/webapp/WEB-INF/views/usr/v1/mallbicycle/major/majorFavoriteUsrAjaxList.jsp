@@ -137,6 +137,7 @@
 	var goUrlView = urlCommon + "majorFavoriteUsrView";						/* #-> */
 	var goUrlMultiUele = urlCommon + "majorFavoriteUsrMultiUele";			/* #-> */
 	var goUrlMultiDele = urlCommon + "majorFavoriteUsrMultiDele";			/* #-> */
+	var goUrlUele = urlCommon + "majorFavoriteUsrUele";						/* #-> */
 	
 	var excelUri = urlCommon + "excelDownload";								/* #-> */
 	
