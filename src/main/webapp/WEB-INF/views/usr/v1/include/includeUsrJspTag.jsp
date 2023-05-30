@@ -11,3 +11,7 @@
 <jsp:useBean id="CategoryServiceImpl" class="com.junefw.infra.category.CategoryServiceImpl"/>
 
 <% pageContext.setAttribute("br", "\n"); %>
+
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="todayDateTime" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="todayDate" />
