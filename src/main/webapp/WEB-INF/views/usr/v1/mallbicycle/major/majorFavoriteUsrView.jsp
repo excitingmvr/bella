@@ -215,6 +215,13 @@
 												</svg>
 											</label>
 										</div>
+<c:if test="${item.mbmtSalesNy eq 0 }">										
+										<div class="form-check radio-text form-check-inline me-2">
+											<div class="product-meta small">
+												* 판매 중지된 상품 입니다.
+											</div>
+										</div>
+</c:if>
 									</div>
 								</div>                            
 								<div class="product-price fs-3 fw-500">
@@ -790,7 +797,7 @@
 	
 	
 	goFavoriteUele = function() {
-		$("#modalAlert").modal("show");		
+		$("#modalAlert").modal("hide");		
 		formVo.attr("action", goUrlUele).submit();
 	}
 </script>

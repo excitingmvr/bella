@@ -208,6 +208,7 @@
 						</svg>
 					</label>
 				</div>
+<c:if test="${item.xMajorTradeCount eq 0 }">				
 				<div class="form-check radio-text form-check-inline me-2">
 					<label class="radio-text-label" for="s2">
 						<a href="/v1/mall/product/productOwnUsrForm">
@@ -227,6 +228,7 @@
 						</a>
 					</label>
 				</div>
+</c:if>				
 			</div>
 		</div>         
 		

@@ -45,7 +45,16 @@
         <div class="product-card-1">
             <div class="product-card-image">
                 <div class="badge-ribbon">
-                    <span class="badge bg-danger">Today</span>
+<c:choose>
+	<c:when test="${list.mbmtSalesNy eq 0 }">
+					<span class="badge bg-danger">Off</span>
+	</c:when>
+	<c:otherwise>
+					<span class="badge bg-success">On</span>
+	</c:otherwise>
+</c:choose>                     
+                    
+                    <!-- <span class="badge bg-danger">Today</span> -->
                 </div>
                 <div class="product-action">
 					<a href="javascript:uleteFavorite(<c:out value="${list.mbmfSeq }"/>)" class="btn btn-outline-primary">

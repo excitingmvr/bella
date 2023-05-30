@@ -52,8 +52,10 @@ public class MajorController extends BaseController{
 	
 	
 	@RequestMapping(value = "/majorGoodsUsrLita")
-	public String majorGoodsUsrLita(@ModelAttribute("vo") MajorVo vo, Model model) throws Exception {
+	public String majorGoodsUsrLita(@ModelAttribute("vo") MajorVo vo, HttpSession httpSession, Model model) throws Exception {
 		
+		setSearch(vo);
+		vo.setSessUsrSeq((String) httpSession.getAttribute("sessUsrSeq"));
 		vo.setParamsPaging(service.selectOneCountMajorGoods(vo));
 		
 		if (vo.getTotalRows() > 0) {
@@ -122,6 +124,17 @@ public class MajorController extends BaseController{
 	public String majorTradeUsrForm() throws Exception {
 		
 		return pathUsrCommon + "majorTradeUsrForm";
+	}
+	
+	
+	@RequestMapping(value = "majorTradeUsrSalesNyUpdt")
+	public String majorTradeUsrSalesNyUpdt(MajorVo vo, Major dto, RedirectAttributes redirectAttributes) throws Exception {
+			    
+		service.updateMajorTradeSalesNy(dto);
+
+		redirectAttributes.addFlashAttribute("vo", vo);
+
+		return pathRedirectCommon + "majorTradeUsrView";
 	}
 
 

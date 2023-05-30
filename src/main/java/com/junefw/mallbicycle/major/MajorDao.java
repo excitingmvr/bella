@@ -34,6 +34,7 @@ public class MajorDao{
 	public Major selectOneMajorTrade(MajorVo vo) { return sqlSession.selectOne(namespace + ".selectOneMajorTrade", vo); }
 	public int insertMajorTrade(Major dto) { return sqlSession.insert(namespace + ".insertMajorTrade", dto); }
 	public int updateMajorTrade(Major dto) { return sqlSession.update(namespace + ".updateMajorTrade", dto); }
+	public int updateMajorTradeSalesNy(Major dto) { return sqlSession.update(namespace + ".updateMajorTradeSalesNy", dto); }
 	public int ueleteMajorTrade(Major dto) { return sqlSession.update(namespace + ".ueleteMajorTrade", dto); }
 	public int deleteMajorTrade(MajorVo vo) { return sqlSession.delete(namespace + ".deleteMajorTrade", vo); }
 	

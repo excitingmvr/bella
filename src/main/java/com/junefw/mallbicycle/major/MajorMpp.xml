@@ -13,6 +13,7 @@
 		FROM 
 			mbccMajorGoods a
 		WHERE 1=1
+			AND a.ifmmSeq = #{sessUsrSeq}
 			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmgDelNy = #{shDelNy}</if>
 			<choose>
 				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -75,6 +76,7 @@
 			,a.mbmgDelNy
 			<include refid="Base.selectRegModWithAlies" />
 			,a.ifmmSeq
+			,(SELECT COUNT(*) FROM mbccMajorTrade aa WHERE 1=1 AND aa.mbmgSeq = a.mbmgSeq AND aa.mbmtSalesNy = 1) as xMajorTradeCount
 		FROM
 			mbccMajorGoods a
 		WHERE 1=1
@@ -317,6 +319,16 @@
 			,mbmtDesc = #{mbmtDesc}
 			<include refid="Base.updateModColumnValue" />
 			,mbmgSeq = #{mbmgSeq}
+		WHERE 1=1
+			AND mbmtSeq = #{mbmtSeq}
+	</update>
+	
+	
+	<update id="updateMajorTradeSalesNy">
+		UPDATE mbccMajorTrade
+		SET
+			mbmtSalesNy = 0
+			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1
 			AND mbmtSeq = #{mbmtSeq}
 	</update>

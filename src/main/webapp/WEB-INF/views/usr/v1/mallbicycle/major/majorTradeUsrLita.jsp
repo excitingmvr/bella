@@ -45,7 +45,14 @@
         <div class="product-card-1">
             <div class="product-card-image">
                 <div class="badge-ribbon">
-                    <span class="badge bg-success">On</span>
+<c:choose>
+	<c:when test="${list.mbmtSalesNy eq 0 }">
+					<span class="badge bg-danger">Off</span>
+	</c:when>
+	<c:otherwise>
+					<span class="badge bg-success">On</span>
+	</c:otherwise>
+</c:choose>                
                 </div>                                        
                 <div class="product-media">
                     <a href="#">

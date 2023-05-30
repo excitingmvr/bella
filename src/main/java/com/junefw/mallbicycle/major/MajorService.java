@@ -24,6 +24,7 @@ public interface MajorService {
 	public Major selectOneMajorTrade(MajorVo vo) throws Exception;
 	public int insertMajorTrade(Major dto) throws Exception;
 	public int updateMajorTrade(Major dto) throws Exception; 
+	public int updateMajorTradeSalesNy(Major dto) throws Exception; 
 	public int ueleteMajorTrade(Major dto) throws Exception; 
 	public int deleteMajorTrade(MajorVo vo) throws Exception;
 	

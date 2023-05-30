@@ -49,6 +49,18 @@
 <div class="row g-3">
     <!-- Product Box -->
 
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+
+<fmt:parseDate value="20230529" pattern="yyyy-MM-dd" var=today2/>
+<fmt:formatDate value="${today2 }" pattern="yyyy-MM-dd" var="today3" />
+
+<c:if test="${today eq today3 }">qwer</c:if>
+
+<c:out value="${today }"></c:out>
+
+<%-- <fmt:parseDate var="regDateTime" value="${list.regDateTime }" pattern="yyyy-MM-dd"/> --%>
+
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 			<span style="padding-left: 50px;">There are no data!</span>
@@ -60,7 +72,12 @@
         <div class="product-card-1">
             <div class="product-card-image">
                 <div class="badge-ribbon">
-                    <span class="badge bg-danger">Today</span>
+<%--                 
+<c:if test="${today eq regDateTime }">
+	<span class="badge bg-danger">Today</span>
+</c:if>         
+ --%>       
+                    <%-- <span class="badge bg-danger">Today<c:out value="${list.regDateTime }"/> <c:out value="${now }"/></span> --%>
                 </div>
                 <div class="product-action">
                     <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="btn btn-outline-primary">

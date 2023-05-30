@@ -151,6 +151,12 @@ public class MajorServiceImpl extends BaseServiceImpl implements MajorService{
 		setRegMod(dto);
 		return dao.updateMajorTrade(dto);
 	}
+
+	@Override
+	public int updateMajorTradeSalesNy(Major dto) throws Exception {
+		setRegMod(dto);
+		return dao.updateMajorTradeSalesNy(dto);
+	}
 	
 	@Override
 	public int ueleteMajorTrade(Major dto) throws Exception {
