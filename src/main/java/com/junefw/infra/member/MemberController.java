@@ -307,36 +307,34 @@ public class MemberController extends BaseController {
 	}
 	
 
-	@RequestMapping(value = "loginForm")
-	public String loginForm(MemberVo vo, HttpSession httpSession) throws Exception {
-		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ) != null) {
+	@RequestMapping(value = "loginXdmForm")
+	public String loginXdmForm(MemberVo vo, HttpSession httpSession) throws Exception {
+		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_XDM) != null) {
 
 			//	auto login
-			if(httpSession.getAttribute("sessSeq") == null) {
+			if(httpSession.getAttribute("sessXdmSeq") == null) {
 				
-				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ));
+				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_XDM));
 				
 				Member rtMember = service.selectOne(vo);
 				
-				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-				httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
-				httpSession.setAttribute("sessId", rtMember.getIfmmId());
-				httpSession.setAttribute("sessName", rtMember.getIfmmName());
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+				httpSession.setAttribute("sessXdmSeq", rtMember.getIfmmSeq());
+				httpSession.setAttribute("sessXdmId", rtMember.getIfmmId());
+				httpSession.setAttribute("sessXdmName", rtMember.getIfmmName());
 			} else {
 				//	by pass
 			}
-			return "redirect:/index/indexView";
+			return pathRedirectCommon + "indexXdmView";
 		} else {
-			//	by pass
-//			return "infra/member/xdmin/loginForm";
-			return "xdm/v1/infra/member/loginForm";
+			return pathUsrCommon + "loginXdmForm";
 		}
 	}
 
 	
 	@ResponseBody
-	@RequestMapping(value = "loginProc")
-	public Map<String, Object> loginProc(Member dto, HttpSession httpSession) throws Exception {
+	@RequestMapping(value = "loginXdmProc")
+	public Map<String, Object> loginXdmProc(Member dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		Member rtMember = service.selectOneId(dto);
@@ -348,15 +346,20 @@ public class MemberController extends BaseController {
 			if (rtMember2 != null) {
 				
 				if(dto.getAutoLogin() == true) {
-					UtilCookie.createCookie(Constants.COOKIE_NAME_SEQ, rtMember2.getIfmmSeq(), Constants.COOKIE_DOMAIN, Constants.COOKIE_PATH, Constants.COOKIE_MAXAGE);
+					UtilCookie.createCookie(
+							Constants.COOKIE_NAME_SEQ_XDM, 
+							rtMember2.getIfmmSeq(), 
+							Constants.COOKIE_DOMAIN_XDM, 
+							Constants.COOKIE_PATH_XDM, 
+							Constants.COOKIE_MAXAGE_XDM);
 				} else {
 					// by pass
 				}
 				
-				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-				httpSession.setAttribute("sessSeq", rtMember2.getIfmmSeq());
-				httpSession.setAttribute("sessId", rtMember2.getIfmmId());
-				httpSession.setAttribute("sessName", rtMember2.getIfmmName());
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+				httpSession.setAttribute("sessSeqXdm", rtMember2.getIfmmSeq());
+				httpSession.setAttribute("sessIdXdm", rtMember2.getIfmmId());
+				httpSession.setAttribute("sessNameXdm", rtMember2.getIfmmName());
 
 				rtMember2.setIfmmSocialLoginCd(103);
 				rtMember2.setIflgResultNy(1);
@@ -390,10 +393,10 @@ public class MemberController extends BaseController {
 
 	
 	@ResponseBody
-	@RequestMapping(value = "logoutProc")
+	@RequestMapping(value = "logoutXdmProc")
 	public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		UtilCookie.deleteCookie();
+		UtilCookie.deleteCookieXdm();
 		httpSession.invalidate();
 		returnMap.put("rt", "success");
 		return returnMap;
@@ -450,39 +453,40 @@ public class MemberController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = "loginNaverProc")
-	public String loginNaverProc(Member dto, HttpSession httpSession) throws Exception {
-
-		Member rtMember = service.selectOneId(dto);
-		
-		if (rtMember != null) {
-			
-			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-			httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
-			httpSession.setAttribute("sessId", rtMember.getIfmmId());
-			httpSession.setAttribute("sessName", "네이버로그인");
-			
-			dto.setIfmmSocialLoginCd(105);
-			dto.setIflgResultNy(1);
-			service.insertLogLogin(dto);
-			
-		} else {
-
-			dto.setIfmmSocialLoginCd(105);
-			service.insertSocialLoginMember(dto);
-			
-			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-			httpSession.setAttribute("sessSeq", dto.getIfmmSeq());
-			httpSession.setAttribute("sessId", dto.getIfmmId());
-			httpSession.setAttribute("sessName", "네이버로그인");
-			
-			dto.setIfmmSocialLoginCd(105);
-			dto.setIflgResultNy(0);
-			service.insertLogLogin(dto);
-		}
-		
-		return "redirect:/index/indexView";
-	}
+//	@RequestMapping(value = "loginNaverProc")
+//	public String loginNaverProc(Member dto, HttpSession httpSession) throws Exception {
+//
+//		Member rtMember = service.selectOneId(dto);
+//		
+//		if (rtMember != null) {
+//			
+//			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+//			httpSession.setAttribute("sessSeq", rtMember.getIfmmSeq());
+//			httpSession.setAttribute("sessId", rtMember.getIfmmId());
+//			httpSession.setAttribute("sessName", "네이버로그인");
+//			
+//			dto.setIfmmSocialLoginCd(105);
+//			dto.setIflgResultNy(1);
+//			service.insertLogLogin(dto);
+//			
+//		} else {
+//
+//			dto.setIfmmSocialLoginCd(105);
+//			service.insertSocialLoginMember(dto);
+//			
+//			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+//			httpSession.setAttribute("sessSeq", dto.getIfmmSeq());
+//			httpSession.setAttribute("sessId", dto.getIfmmId());
+//			httpSession.setAttribute("sessName", "네이버로그인");
+//			
+//			dto.setIfmmSocialLoginCd(105);
+//			dto.setIflgResultNy(0);
+//			service.insertLogLogin(dto);
+//		}
+//		
+//		return "redirect:/index/indexView";
+//	}
+	
 	
 	/* usr */
 	@RequestMapping(value = "/loginUsrForm")
@@ -499,7 +503,7 @@ public class MemberController extends BaseController {
 				
 				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_USR); // 60second * 30 = 30minute
 				httpSession.setAttribute("sessUsrSeq", rtMember.getIfmmSeq());
-				httpSession.setAttribute("sessUsrIdUsr", rtMember.getIfmmId());
+				httpSession.setAttribute("sessUsrId", rtMember.getIfmmId());
 				httpSession.setAttribute("sessUsrName", rtMember.getIfmmName());
 			} else {
 				//	by pass
@@ -573,7 +577,7 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "logoutUsrProc")
 	public Map<String, Object> logoutUsrProc(HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		UtilCookie.deleteCookie();
+		UtilCookie.deleteCookieUsr();
 		httpSession.invalidate();
 		returnMap.put("rt", "success");
 		return returnMap;
@@ -646,7 +650,7 @@ public class MemberController extends BaseController {
 			dto.setIfmmPassword(dto.getxPasswordNew());
 			service.updateChangePwd(dto);
 			
-			UtilCookie.deleteCookie();
+			UtilCookie.deleteCookieUsr();
 			httpSession.invalidate();
 			
 			returnMap.put("rt", "success");
@@ -677,7 +681,7 @@ public class MemberController extends BaseController {
 			dto.setIfmmSeq(rtMember.getIfmmSeq());
 			service.uelete(dto);
 			
-			UtilCookie.deleteCookie();
+			UtilCookie.deleteCookieUsr();
 			httpSession.invalidate();
 			
 			returnMap.put("rt", "success");

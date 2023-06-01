@@ -11,7 +11,7 @@ public final class Constants {
 	public static final int INSERT_AFTER_TYPE = 1;		
 	public static final int UPDATE_AFTER_TYPE = 1;		
 	
-	public static final int SESSION_MINUTE = 30;
+	public static final int SESSION_MINUTE_XDM = 30;
 	
 	public static final String URL_LOGINFORM = "/member/loginForm";
 	
@@ -27,10 +27,10 @@ public final class Constants {
 	public static final String UPLOAD_PATH_PREFIX = "D://factory/ws_sts_4151/aria/src/main/webapp/resources/uploaded";
 	public static final String UPLOAD_PATH_PREFIX_FOR_VIEW = "/resources/uploaded";
 	
-	public static final int COOKIE_MAXAGE = 60 * 60 * 24 * 30;	//초 * 분 * 시간 * 일 : 30day
-	public static final String COOKIE_DOMAIN = "";
-	public static final String COOKIE_PATH = "/";
-	public static final String COOKIE_NAME_SEQ = "cookieSeq";
+	public static final int COOKIE_MAXAGE_XDM = 60 * 60 * 24 * 30;	//초 * 분 * 시간 * 일 : 30day
+	public static final String COOKIE_DOMAIN_XDM = "";
+	public static final String COOKIE_PATH_XDM = "/";
+	public static final String COOKIE_NAME_SEQ_XDM = "cookieSeqXdm";
 	
 	public static final String versionUiMain = "v1";
 	

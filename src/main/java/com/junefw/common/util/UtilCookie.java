@@ -50,13 +50,22 @@ public class UtilCookie {
     }
     
 
-    public static void deleteCookie() throws Exception {
+    public static void deleteCookieXdm() throws Exception {
     	HttpServletResponse httpServletResponse = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getResponse();
-       	Cookie cookie = new Cookie(Constants.COOKIE_NAME_SEQ, null);
+       	Cookie cookie = new Cookie(Constants.COOKIE_NAME_SEQ_XDM, null);
        	cookie.setPath("/");
        	cookie.setDomain("");
         cookie.setMaxAge(0);
         httpServletResponse.addCookie(cookie);
     }
     
+    
+    public static void deleteCookieUsr() throws Exception {
+    	HttpServletResponse httpServletResponse = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getResponse();
+       	Cookie cookie = new Cookie(Constants.COOKIE_NAME_SEQ_USR, null);
+       	cookie.setPath("/");
+       	cookie.setDomain("");
+        cookie.setMaxAge(0);
+        httpServletResponse.addCookie(cookie);
+    }
 }
