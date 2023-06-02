@@ -309,12 +309,12 @@ public class MemberController extends BaseController {
 
 	@RequestMapping(value = "loginXdmForm")
 	public String loginXdmForm(MemberVo vo, HttpSession httpSession) throws Exception {
-		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_XDM) != null) {
+		if(UtilCookie.getValueXdm(Constants.COOKIE_NAME_SEQ_XDM) != null) {
 
 			//	auto login
 			if(httpSession.getAttribute("sessXdmSeq") == null) {
 				
-				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_XDM));
+				vo.setIfmmSeq(UtilCookie.getValueXdm(Constants.COOKIE_NAME_SEQ_XDM));
 				
 				Member rtMember = service.selectOne(vo);
 				
@@ -327,11 +327,11 @@ public class MemberController extends BaseController {
 			}
 			return pathRedirectCommon + "indexXdmView";
 		} else {
-			return pathUsrCommon + "loginXdmForm";
+			return pathXdmCommon + "loginXdmForm";
 		}
 	}
 
-	
+
 	@ResponseBody
 	@RequestMapping(value = "loginXdmProc")
 	public Map<String, Object> loginXdmProc(Member dto, HttpSession httpSession) throws Exception {
@@ -492,12 +492,12 @@ public class MemberController extends BaseController {
 	@RequestMapping(value = "/loginUsrForm")
 	public String loginUsrForm(MemberVo vo, HttpSession httpSession) throws Exception {
 		
-		if(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_USR) != null) {
+		if(UtilCookie.getValueUsr(Constants.COOKIE_NAME_SEQ_USR) != null) {
 
 			//	auto login
 			if(httpSession.getAttribute("sessUsrSeq") == null) {
 				
-				vo.setIfmmSeq(UtilCookie.getValue(Constants.COOKIE_NAME_SEQ_USR));
+				vo.setIfmmSeq(UtilCookie.getValueUsr(Constants.COOKIE_NAME_SEQ_USR));
 				
 				Member rtMember = service.selectOne(vo);
 				

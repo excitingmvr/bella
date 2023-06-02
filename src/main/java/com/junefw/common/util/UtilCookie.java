@@ -29,7 +29,7 @@ public class UtilCookie {
     }
     
 
-    public static String getValue(String name) throws Exception {
+    public static String getValueUsr(String name) throws Exception {
     	HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
     	Cookie[] cookies = httpServletRequest.getCookies();
     	
@@ -37,7 +37,7 @@ public class UtilCookie {
     	
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals(Constants.COOKIE_NAME_SEQ)) {
+				if (cookie.getName().equals(Constants.COOKIE_NAME_SEQ_USR)) {
 					rt = cookie.getValue();
 				} else {
 					//	by pass
@@ -46,6 +46,27 @@ public class UtilCookie {
 		} else {
 			//	by pass
 		}
+    	return rt;
+    }
+
+    
+    public static String getValueXdm(String name) throws Exception {
+    	HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+    	Cookie[] cookies = httpServletRequest.getCookies();
+    	
+    	String rt = null;
+    	
+    	if (cookies != null) {
+    		for (Cookie cookie : cookies) {
+    			if (cookie.getName().equals(Constants.COOKIE_NAME_SEQ_XDM)) {
+    				rt = cookie.getValue();
+    			} else {
+    				//	by pass
+    			}
+    		}
+    	} else {
+    		//	by pass
+    	}
     	return rt;
     }
     
