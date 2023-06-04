@@ -59,7 +59,6 @@
 				,a.ifmmEmailConsentNy
 				,a.ifmmSmsConsentNy
 				,a.ifmmPushConsentNy
-				,a.ifmmCountryResidence
 				,a.ifmmDesc
 				,a.ifmmDelNy
 				,a.regIp
@@ -114,7 +113,6 @@
 			,a.ifmmEmailConsentNy
 			,a.ifmmSmsConsentNy
 			,a.ifmmPushConsentNy
-			,a.ifmmCountryResidence
 			,a.ifmmDesc
 			,a.ifmmDelNy
 			<include refid="Base.selectRegModWithAlies" />

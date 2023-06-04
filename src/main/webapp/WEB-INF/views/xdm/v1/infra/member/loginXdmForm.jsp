@@ -67,7 +67,7 @@
 			<input type="text" id="ifmmId" name="ifmmId" maxlength="20" placeholder="ID" class="form-control" value="xdmin">
 		</div>
 		<div class="col">
-			<input type="password" id="ifmmPassword" name="ifmmPassword" maxlength="20" placeholder="Password" class="form-control" value="aaa">
+			<input type="password" id="ifmmPassword" name="ifmmPassword" maxlength="20" placeholder="Password" class="form-control" value="1">
 		</div>
 
 		<div class="col">
@@ -166,11 +166,7 @@ $("#btnLoginNaver").on("click", function(){
 			,data : { "ifmmId" : $("#ifmmId").val(), "ifmmPassword" : $("#ifmmPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
 			,success: function(response) {
 				if(response.rt == "success") {
-					if(response.changePwd == "true") {
-						location.href = URL_CHANGE_PWD_FORM;
-					} else {
-						location.href = URL_INDEX_ADMIN;
-					}
+					location.href = URL_INDEX_VIEW_XDM;
 				} else {
 					alert("회원없음");
 				}

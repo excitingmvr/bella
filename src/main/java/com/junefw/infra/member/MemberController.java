@@ -325,7 +325,7 @@ public class MemberController extends BaseController {
 			} else {
 				//	by pass
 			}
-			return pathRedirectCommon + "indexXdmView";
+			return "redirect:/v1/infra/index/indexXdmView";
 		} else {
 			return pathXdmCommon + "loginXdmForm";
 		}
@@ -365,12 +365,12 @@ public class MemberController extends BaseController {
 				rtMember2.setIflgResultNy(1);
 				service.insertLogLogin(rtMember2);
 
-				Date date = rtMember2.getIfmmPwdModDate();
-				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-
-				if (ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
-					returnMap.put("changePwd", "true");
-				}
+//				Date date = rtMember2.getIfmmPwdModDate();
+//				LocalDateTime ifmmPwdModDateLocalDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+//
+//				if (ChronoUnit.DAYS.between(ifmmPwdModDateLocalDateTime, UtilDateTime.nowLocalDateTime()) > Constants.PASSWOPRD_CHANGE_INTERVAL) {
+//					returnMap.put("changePwd", "true");
+//				}
 
 				returnMap.put("rt", "success");
 			} else {
