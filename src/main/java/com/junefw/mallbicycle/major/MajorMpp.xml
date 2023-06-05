@@ -351,6 +351,69 @@
 	</delete>
 	
 	
+	<sql id ="selectCommonMajorTradeComment">
+		FROM 
+			mbccMajorCommnet a
+		WHERE 1=1
+			AND b.ifmmSeq = #{sessUsrSeq}
+			<if test="shDelNy != null and !shDelNy.equals('')">AND mbmtDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectListMajorTradeComment" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.mbmtSeq
+				,a.mbmtTitle
+				,a.mbmtPrice
+				,a.mbmtSalesNy
+				,a.mbmtDelNy
+		<include refid="Base.selectRegModWithAlies" />
+				,a.mbmgSeq
+				,b.mbmgTypeCd
+				,b.mbmgTypeDetailCd
+				,b.mbmgTitle
+				,b.mbmgBrandCt
+				,b.mbmgModelCt
+				,b.mbmgProductionYear
+				,b.mbmgSizeCd
+				,b.mbmgMaterialCd
+				,b.mbmgDriveTrainCd
+				,b.mbmgBreakCd
+				,b.mbmgWheelCd
+				,b.mbmgTireCd
+				,b.mbmgDriveSystemCd
+				,c.mbtdSeq
+				,c.mbtdDefaultNy
+				,c.mbtdDistrictCt
+				,c.mbtdDistrict2Ct
+				,c.mbtdDistrict3Ct
+				,c.mbtdDistrict4Ct
+				,c.mbtdDistrictDetail
+				,c.mbtdDelNy
+				,(SELECT count(*) 
+					FROM (
+							SELECT count(mbmhSeq) FROM mbccMajorHit aa WHERE 1=1 AND aa.mbmtSeq = a.mbmtSeq GROUP BY DATE(aa.regDatetime), aa.ifmmSeq
+						) aaa
+					) AS xMajorHitCount			
+				,(SELECT count(mbmfSeq) FROM mbccMajorFavorite bb WHERE 1=1 AND bb.mbmfDelNy = 0 AND bb.mbmtSeq = a.mbmtSeq) AS xMajorFavoriteCount
+				,(SELECT count(*) FROM mbccMajorFavorite cc where 1=1 AND cc.mbmfDelNy = 0 AND cc.mbmtSeq = a.mbmtSeq AND cc.ifmmSeq = #{sessUsrSeq} ) as xMajorMyFavoriteCount											
+		<include refid="selectCommonMajorTradeComment" />
+			ORDER BY a.mbmtSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCountMajorTradeComment" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorTradeComment" />
+	</select>
+	
 <!-- favorite -->
 	<sql id ="selectCommonMajorFavorite">
 		FROM 

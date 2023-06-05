@@ -136,6 +136,9 @@ public class MajorController extends BaseController{
 
 		return pathRedirectCommon + "majorTradeUsrView";
 	}
+	
+	
+	// majorTradeCommentUsrAjaxList
 
 
 //	favorite

@@ -265,8 +265,26 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="pd_reviews" role="tabpanel" aria-labelledby="pd_reviews_tab">
+								<div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="border p-4 sticky-lg-top review-form mt-4 mt-lg-0">
+                                            <h5 class="mb-3 pb-3 border-bottom">WRITE</h5>
+                                            <form>
+                                                <div class="row g-2">
+                                                    <div class="col-sm-12">
+                                                        <label class="form-label">Body of Review (1500)</label>
+                                                        <textarea rows="5" class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="col-sm-12 pt-2">
+                                                        <button type="button" class="btn btn-primary" id="btnComment">Submit Review</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>                            
                                 <div class="row">
-                                    <div class="col-lg-8 pe-lg-8">
+                                    <div class="col-lg-12">
                                         <div class="d-flex review-box border-top pt-4">
                                             <div>
                                                 <div class="review-image">
@@ -275,7 +293,7 @@
                                             </div>
                                             <div class="col ps-3">
                                                 <h6>Nancy Bayer</h6>
-                                                <div class="rating-star small">
+                                                <div class="rating-star">
                                                     <span>2022:12:12 12:12:12</span>&nbsp;&nbsp;&nbsp;
                                                     <a href=""><i class="bi bi-trash3"></i></a>&nbsp;&nbsp;
                                                     <a href=""><i class="bi bi-pencil-square"></i></a>
@@ -297,9 +315,13 @@
                                                     <i class="bi small bi-star-fill active"></i>
                                                     <i class="bi small bi-star-fill active"></i>
                                                     <i class="bi small bi-star"></i>
-                                                    <span>13 April 2012</span>
+                                                    <span> 2022:12:12 12:12:12</span>
                                                 </div>
                                                 <p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
+                                                <div class="nav dark-link pt-2">
+													<a href=""><i class="bi bi-trash3"></i></a>&nbsp;&nbsp; 
+                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="d-flex review-box border-top mt-4 pt-4">
@@ -359,22 +381,6 @@
                                                 </ul>
                                             </div>
                                         </div>                                        
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="border p-4 sticky-lg-top review-form mt-4 mt-lg-0">
-                                            <h5 class="mb-3 pb-3 border-bottom">WRITE</h5>
-                                            <form>
-                                                <div class="row g-2">
-                                                    <div class="col-sm-12">
-                                                        <label class="form-label">Body of Review (1500)</label>
-                                                        <textarea rows="5" class="form-control"></textarea>
-                                                    </div>
-                                                    <div class="col-sm-12 pt-2">
-                                                        <button class="btn btn-primary">Submit Review</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -834,6 +840,13 @@
 	goFavorite = function() {
 		location.href = "/v1/mallbicycle/major/majorFavoriteUsrAjaxList";
 	}
+	
+
+	$("#btnComment").on("click", function(){
+		alert("asasdfasdf");
+	});
+
+
 	
 </script>
 
