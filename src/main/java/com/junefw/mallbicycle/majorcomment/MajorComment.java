@@ -1,4 +1,4 @@
-package com.junefw.mallbicycle.major;
+package com.junefw.mallbicycle.majorcomment;
 
 import java.io.Serializable;
 

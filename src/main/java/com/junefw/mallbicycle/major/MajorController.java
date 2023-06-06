@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.junefw.common.base.BaseController;
 import com.junefw.common.util.UtilDateTime;
+import com.junefw.mallbicycle.majorcomment.MajorCommentServiceImpl;
 
 @Controller
 @RequestMapping(value = "/v1/mallbicycle/major")
@@ -28,6 +29,9 @@ public class MajorController extends BaseController{
 
 	@Autowired
 	MajorServiceImpl service;
+	
+	@Autowired
+	MajorCommentServiceImpl serviceComment;
 	
 
 	public void setSearch(MajorVo vo) throws Exception {

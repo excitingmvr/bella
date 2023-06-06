@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                   
+<mapper namespace="com.junefw.mallbicycle.majorcomment.MajorCommentMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.mallbicycle.majorcomment.MajorComment"></resultMap>
+
+
+	<sql id ="selectCommonMajorComment">
+		FROM 
+			mbccMajorComment a
+		WHERE 1=1
+			AND a.mbmtSeq = #{mbmtSeq}
+			<if test="shDelNy != null and !shDelNy.equals('')">AND mbctDelNy = #{shDelNy}</if>
+			<choose>
+				<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	
+	
+	<select id="selectListMajorComment" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				,a.mbctSeq
+				,a.mbctComment
+				,a.mbctScore
+				,a.mbctDelNy
+		<include refid="Base.selectRegModWithAlies" />
+				,a.mbmtSeq
+				,a.ifmmSeq
+		<include refid="selectCommonMajorComment" />
+			ORDER BY a.mbctSeq DESC
+			<include refid="Base.orderByLimitForMysql" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	
+	<select id="selectOneCountMajorComment" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommonMajorComment" />
+	</select>
+	
+	
+	<select id="selectOneMajorComment" resultMap="resultMapObj">
+		SELECT
+			,a.mbctSeq
+			,a.mbctComment
+			,a.mbctScore
+			,a.mbctDelNy
+			<include refid="Base.selectRegModWithAlies" />
+			,a.mbmtSeq
+			,a.ifmmSeq
+		FROM
+			mbccMajorComment a
+		WHERE 1=1
+			AND a.mbctSeq = #{mbctSeq}
+	</select>
+	
+	
+	<insert id="insertMajorComment">
+		INSERT INTO mbccMajorComment (
+			,mbctSeq
+			,mbctComment
+			,mbctScore
+			,mbctDelNy
+			<include refid="Base.insertRegModColumn" />
+			,mbmtSeq
+			,ifmmSeq			
+		)
+		VALUES (
+			#{mbctComment}
+			,#{mbctScore}
+			,0
+			<include refid="Base.insertRegModValue" />
+			,#{mbmtSeq}
+			,#{ifmmSeq}			
+		)
+		 <selectKey resultType="String" keyProperty="mbctSeq" order="AFTER">
+			SELECT last_insert_id()
+		 </selectKey>
+	</insert>
+
+
+	<update id="updateMajorComment">
+		UPDATE mbccMajorComment
+		SET
+			,mbctComment = #{mbctComment}
+			,mbctScore = #{mbctScore}
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND mbctSeq = #{mbctSeq}
+	</update>
+	
+	
+	<update id="ueleteMajorComment">
+		UPDATE mbccMajorComment
+		SET
+			mbctDelNy = 1
+			<include refid="Base.updateModColumnValue" />
+		WHERE 1=1
+			AND mbctSeq = #{mbctSeq}
+	</update>
+	
+	
+	<delete id="deleteMajorComment">
+		DELETE FROM mbccMajorComment
+		WHERE 1=1
+			AND mbctSeq = #{mbctSeq}
+	</delete>
+
+
+</mapper>
+
+
+
