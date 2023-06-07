@@ -58,6 +58,7 @@ public class Major extends Base implements Serializable{
 	private Integer xMajorHitCount;
 	private Integer xMajorMyFavoriteCount;
 	private Integer xMajorTradeCount;
+	private Integer xMajorCommentCount;
 //	-----
 	public String getMbmgSeq() {
 		return mbmgSeq;
@@ -292,6 +293,12 @@ public class Major extends Base implements Serializable{
 	}
 	public void setxMajorTradeCount(Integer xMajorTradeCount) {
 		this.xMajorTradeCount = xMajorTradeCount;
+	}
+	public Integer getxMajorCommentCount() {
+		return xMajorCommentCount;
+	}
+	public void setxMajorCommentCount(Integer xMajorCommentCount) {
+		this.xMajorCommentCount = xMajorCommentCount;
 	}
 	
 }

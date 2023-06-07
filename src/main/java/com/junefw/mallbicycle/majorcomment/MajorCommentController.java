@@ -1,7 +1,13 @@
 package com.junefw.mallbicycle.majorcomment;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.junefw.common.base.BaseController;
@@ -31,7 +37,19 @@ public class MajorCommentController extends BaseController{
 	
 //	usr s ////////////////////
 //
-	
+	@RequestMapping(value = "/majorCommentUsrLita")
+	public String majorCommentUsrLita(@ModelAttribute("vo") MajorCommentVo vo, HttpSession httpSession, Model model) throws Exception {
+		
+		setSearch(vo);
+		vo.setParamsPaging(service.selectOneCountMajorComment(vo));
+		
+		if (vo.getTotalRows() > 0) {
+			List<MajorComment> list = service.selectListMajorComment(vo);
+			model.addAttribute("list", list);
+		}
+		
+		return "usr/v1/mallbicycle/major/majorCommentUsrLita";
+	}
 	
 //	
 //	usr e ////////////////////

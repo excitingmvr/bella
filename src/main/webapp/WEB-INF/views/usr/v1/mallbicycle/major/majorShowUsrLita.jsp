@@ -103,7 +103,7 @@
 <!-- includeUsrBicycleLita e -->
 	            
 				<h6 class="product-title" style="padding-top: 10px;">
-					<a href="javascript:goView(<c:out value="${list.mbmtSeq}"/>)"><c:out value="${list.mbmtTitle }"/></a>
+					<a href="javascript:goView(<c:out value="${list.mbmtSeq}"/>)"><c:out value="${list.mbmtTitle }"/></a> (<c:out value="${list.xMajorCommentCount }"/>)
 				</h6>	            
 				<div class="product-price">
 					<span class="text-primary"><fmt:formatNumber value="${list.mbmtPrice }" pattern="#,###" /></span>

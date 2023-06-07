@@ -25,7 +25,7 @@
 	<select id="selectListMajorComment" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
 			SELECT
-				,a.mbctSeq
+				a.mbctSeq
 				,a.mbctComment
 				,a.mbctScore
 				,a.mbctDelNy
@@ -47,7 +47,7 @@
 	
 	<select id="selectOneMajorComment" resultMap="resultMapObj">
 		SELECT
-			,a.mbctSeq
+			a.mbctSeq
 			,a.mbctComment
 			,a.mbctScore
 			,a.mbctDelNy
@@ -63,7 +63,7 @@
 	
 	<insert id="insertMajorComment">
 		INSERT INTO mbccMajorComment (
-			,mbctSeq
+			mbctSeq
 			,mbctComment
 			,mbctScore
 			,mbctDelNy
@@ -88,7 +88,7 @@
 	<update id="updateMajorComment">
 		UPDATE mbccMajorComment
 		SET
-			,mbctComment = #{mbctComment}
+			mbctComment = #{mbctComment}
 			,mbctScore = #{mbctScore}
 			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1

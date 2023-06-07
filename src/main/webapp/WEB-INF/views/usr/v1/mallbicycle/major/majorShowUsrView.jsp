@@ -260,7 +260,7 @@
                     <div class="product-tabs">
                         <ul class="nav product-nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a href="#" class="nav-link active" id="pd_reviews_tab" data-bs-toggle="tab" data-bs-target="#pd_reviews" role="tab" aria-controls="pd_reviews" aria-selected="false">Comments (23)</a>
+                                <a href="#" class="nav-link active" id="pd_reviews_tab" data-bs-toggle="tab" data-bs-target="#pd_reviews" role="tab" aria-controls="pd_reviews" aria-selected="false">Comments (<c:out value="${item.xMajorCommentCount }"/>)</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -283,106 +283,11 @@
                                         </div>
                                     </div>
                                 </div>                            
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="d-flex review-box border-top pt-4">
-                                            <div>
-                                                <div class="review-image">
-                                                    <img class="img-fluid" src="/resources/usr/v1/image/infra/member/1000x1000.jpg" title="" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col ps-3">
-                                                <h6>Nancy Bayer</h6>
-                                                <div class="rating-star">
-                                                    <span>2022:12:12 12:12:12</span>&nbsp;&nbsp;&nbsp;
-                                                    <a href=""><i class="bi bi-trash3"></i></a>&nbsp;&nbsp;
-                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
-                                                </div>
-                                                <p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex review-box border-top mt-4 pt-4">
-                                            <div>
-                                                <div class="review-image">
-                                                    <img class="img-fluid" src="../../assets/img/fashion/1000x1000.jpg" title="" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col ps-3">
-                                                <h6>Nancy Bayer</h6>
-                                                <div class="rating-star small">
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star"></i>
-                                                    <span> 2022:12:12 12:12:12</span>
-                                                </div>
-                                                <p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
-                                                <div class="nav dark-link pt-2">
-													<a href=""><i class="bi bi-trash3"></i></a>&nbsp;&nbsp; 
-                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex review-box border-top mt-4 pt-4">
-                                            <div>
-                                                <div class="review-image">
-                                                    <img class="img-fluid" src="../../assets/img/fashion/1000x1000.jpg" title="" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col ps-3">
-                                                <h6>Nancy Bayer</h6>
-                                                <div class="rating-star small">
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star"></i>
-                                                    <span>13 April 2012</span>
-                                                </div>
-                                                <p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex review-box border-top mt-4 pt-4">
-                                            <div>
-                                                <div class="review-image">
-                                                    <img class="img-fluid" src="../../assets/img/fashion/1000x1000.jpg" title="" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col ps-3">
-                                                <h6>Nancy Bayer</h6>
-                                                <div class="rating-star small">
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star-fill active"></i>
-                                                    <i class="bi small bi-star"></i>
-                                                    <span>13 April 2012</span>
-                                                </div>
-                                                <p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
-                                            </div>
-                                        </div>
-                                        <div class="shop-bottom-bar d-flex align-items-center mt-3">
-                                            <div class="ms-auto ">
-                                                <ul class="pagination">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>                                        
-                                    </div>
-                                </div>
+                                
+                                
+<div id="lita"></div>		<!-- #-> -->                                   
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -766,10 +671,12 @@
 
 <script src="/resources/usr/v1/js/includeUsrView.js"></script>
 
-<script>
+<script type="text/javascript">
 
 	$(document).ready(function(){
-
+		
+		setLitaComment();
+		
 	}); 
 
 	var urlCommon = "/v1/mallbicycle/major/";						/* #-> */
@@ -847,6 +754,27 @@
 	});
 
 
+	function setLitaComment() {
+		var mbmtSeqJs = '<c:out value="${item.mbmtSeq}"/>';
+		
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/v1/mallbicycle/majorcomment/majorCommentUsrLita"
+			/* ,data : $("#formList").serialize() */
+			,data : { "mbmtSeq": mbmtSeqJs }
+			,success: function(response) {
+				$("#lita").empty();
+				$("#lita").append(response);
+// 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
 	
 </script>
 
