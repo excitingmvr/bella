@@ -750,7 +750,23 @@
 	
 
 	$("#btnComment").on("click", function(){
-		alert("asasdfasdf");
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/v1/mallbicycle/majorcomment/majorCommentUsrInst"
+			/* ,data : $("#formList").serialize() */
+			,data : { "mbmtSeq": mbmtSeqJs }
+			,success: function(response) {
+				$("#lita").empty();
+				$("#lita").append(response);
+// 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
 	});
 
 
@@ -769,6 +785,35 @@
 				$("#lita").empty();
 				$("#lita").append(response);
 // 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+	
+	
+	ueleModalComment = function(mbctSeqJs) {
+		$("#modalAlertTitle").text("코멘트");
+		$("#modalAlertBody").text("삭제 하시겠습니까?");
+		$("#btnUeleComment").remove();
+		$("#modalAlertFooter").append('<button type="button" class="btn btn-danger btn-sm" id="btnUeleComment" onclick="ueleComment('+ mbctSeqJs +');">삭제</button>');
+		$("#modalAlert").modal("show");
+	}
+
+	
+	ueleComment = function(mbctSeqJs) {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/v1/mallbicycle/majorcomment/majorCommentUsrUele"
+			/* ,data : $("#formList").serialize() */
+			,data : { "mbctSeq": mbctSeqJs }
+			,success: function(response) {
+				$("#"+mbctSeqJs).remove();
+				$("#modalAlert").modal("hide");
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

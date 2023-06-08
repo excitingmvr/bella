@@ -14,7 +14,7 @@
 
 <c:forEach items="${list}" var="list" varStatus="status">
 	    
-        <div class="d-flex review-box border-top pt-4">
+        <div class="d-flex review-box border-top pt-4" id="<c:out value="${list.mbctSeq }"/>">
             <div>
                 <div class="review-image">
                     <img class="img-fluid" src="/resources/usr/v1/image/infra/member/1000x1000.jpg" title="" alt="">
@@ -24,8 +24,8 @@
                 <h6><c:out value="${list.regId }"/></h6>
                 <div class="rating-star">
                     <span><fmt:formatDate value="${list.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>&nbsp;&nbsp;&nbsp;
-                    <a href=""><i class="bi bi-trash3"></i></a>&nbsp;&nbsp;
-                    <a href=""><i class="bi bi-pencil-square"></i></a>
+                    <a href="javascript:void(0);" onclick="ueleModalComment(<c:out value="${list.mbctSeq }"/>)"><i class="bi bi-trash3"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:void(0);"><i class="bi bi-pencil-square"></i></a>
                 </div>
                 <p class="m-0 pt-3"><c:out value="${list.mbctComment }"/></p>
             </div>

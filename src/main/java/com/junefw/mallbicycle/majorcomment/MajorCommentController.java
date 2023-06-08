@@ -1,6 +1,8 @@
 package com.junefw.mallbicycle.majorcomment;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.junefw.common.base.BaseController;
 import com.junefw.common.util.UtilDateTime;
@@ -51,6 +54,36 @@ public class MajorCommentController extends BaseController{
 		return "usr/v1/mallbicycle/major/majorCommentUsrLita";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "majorCommentUsrUele")
+	public Map<String, Object> majorCommentUsrUele(MajorComment dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.ueleteMajorComment(dto);
+
+		if (result > 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "majorCommentUsrInst")
+	public Map<String, Object> majorCommentUsrInst(MajorComment dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.insertMajorComment(dto);
+
+		if (result > 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
 //	
 //	usr e ////////////////////
 	
