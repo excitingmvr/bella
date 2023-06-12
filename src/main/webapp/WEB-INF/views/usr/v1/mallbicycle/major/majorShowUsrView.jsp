@@ -273,7 +273,7 @@
                                                 <div class="row g-2">
                                                     <div class="col-sm-12">
                                                         <label class="form-label">Body of Review (1500)</label>
-                                                        <textarea rows="5" class="form-control"></textarea>
+                                                        <textarea rows="5" class="form-control" name="mbctComment" id="mbctComment"></textarea>
                                                     </div>
                                                     <div class="col-sm-12 pt-2">
                                                         <button type="button" class="btn btn-primary" id="btnComment">Submit Review</button>
@@ -750,29 +750,46 @@
 	
 
 	$("#btnComment").on("click", function(){
-		$.ajax({
-			async: true 
-			,cache: false
-			,type: "post"
-			/* ,dataType:"json" */
-			,url: "/v1/mallbicycle/majorcomment/majorCommentUsrInst"
-			/* ,data : $("#formList").serialize() */
-			,data : { "mbmtSeq": mbmtSeqJs }
-			,success: function(response) {
-				$("#lita").empty();
-				$("#lita").append(response);
-// 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
-			}
-			,error : function(jqXHR, textStatus, errorThrown){
-				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-			}
-		});
+		var sessUsrSeqJs = '<c:out value="${sessUsrSeq}"/>';
+		var mbmtSeqJs = '<c:out value="${item.mbmtSeq}"/>';
+		
+		if(sessUsrSeqJs) {
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				/* ,dataType:"json" */
+				,url: "/v1/mallbicycle/majorcomment/majorCommentUsrInst"
+				/* ,data : $("#formList").serialize() */
+				,data : { "mbmtSeq": mbmtSeqJs, "mbctComment": $("#mbctComment").val() }
+				,success: function(response) {
+					setLitaComment();
+					$("#mbctComment").val("");
+//	 				$("#lita").empty();
+//	 				$("#lita").append(response);
+//	 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		} else {
+			$("#modalAlertTitle").text("코멘트");
+			$("#modalAlertBody").text("로그인 후 이용가능한 서비스 입니다.");
+			
+			$("#btnMoveToLogin").remove();
+			$("#modalAlertFooter").append('<button type="button" class="btn btn-primary btn-sm" id="btnMoveToLogin" onclick="goLogin();">Login</button>');
+			
+			$("#modalAlert").modal("show");
+		}
+
+		
 	});
 
 
 	function setLitaComment() {
 		var mbmtSeqJs = '<c:out value="${item.mbmtSeq}"/>';
-		
+
 		$.ajax({
 			async: true 
 			,cache: false
@@ -820,7 +837,11 @@
 			}
 		});
 	}
+
 	
+	updateComment = function(mbctSeqJs) {
+		
+	}
 </script>
 
 </body>

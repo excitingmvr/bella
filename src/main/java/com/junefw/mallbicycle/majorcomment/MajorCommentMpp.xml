@@ -63,8 +63,7 @@
 	
 	<insert id="insertMajorComment">
 		INSERT INTO mbccMajorComment (
-			mbctSeq
-			,mbctComment
+			mbctComment
 			,mbctScore
 			,mbctDelNy
 			<include refid="Base.insertRegModColumn" />

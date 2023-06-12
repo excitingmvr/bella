@@ -75,6 +75,8 @@ public class MajorCommentController extends BaseController{
 	public Map<String, Object> majorCommentUsrInst(MajorComment dto) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
+		System.out.println("asdasdf");
+		
 		int result = service.insertMajorComment(dto);
 
 		if (result > 0) {
