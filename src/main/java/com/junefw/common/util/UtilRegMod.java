@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.junefw.common.constants.Constants;
+
 public class UtilRegMod {
 
 	public static String getClientIp() {
@@ -65,7 +67,14 @@ public class UtilRegMod {
 	
 	public static String getSessionSeqCore(HttpServletRequest httpServletRequest) {
 		HttpSession httpSession =  httpServletRequest.getSession();
-		String rtSeq = (String) httpSession.getAttribute("sessSeq");
+		String rtSeq;
+		
+		if(httpServletRequest.getRequestURI().contains(Constants.ABBREVIATION_ADMIN)) {
+			rtSeq = (String) httpSession.getAttribute(Constants.SESSION_SEQ_NAME_XDM);
+		} else {
+			rtSeq = (String) httpSession.getAttribute(Constants.SESSION_SEQ_NAME_USR);
+		}
+		
 		return rtSeq;
 	}
 	
@@ -117,6 +126,7 @@ public class UtilRegMod {
 			return device;
 		}
 
+		return device;
 		
 //	   if (userAgent.indexOf("iphone") > -1) {
 //		   device = "iPhone";
@@ -151,7 +161,6 @@ public class UtilRegMod {
 //				device = "other";
 //			}
 //	    }
-	   
-		return device;
+
 	}
 }

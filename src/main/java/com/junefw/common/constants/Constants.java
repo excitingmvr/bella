@@ -3,6 +3,11 @@ package com.junefw.common.constants;
 
 public final class Constants {
 
+//	common
+	
+	public static final String ABBREVIATION_ADMIN = "Xdm"; 
+	public static final String ABBREVIATION_USER = "Usr";
+	
 //	for paging
 	public static final int ROW_NUM_TO_SHOW = 5;
 	public static final int PAGE_NUM_TO_SHOW = 5;
@@ -34,6 +39,9 @@ public final class Constants {
 	
 	public static final String versionUiMain = "v1";
 	
+	public static final String SESSION_SEQ_NAME_XDM = "sessXdmSeq";
+	
+	
 //	usr
 	
 	public static final int SESSION_MINUTE_USR = 30;
@@ -45,7 +53,7 @@ public final class Constants {
 	public static final String COOKIE_PATH_USR = "/";
 	public static final String COOKIE_NAME_SEQ_USR = "cookieSeqUsr";
 	
-	
+	public static final String SESSION_SEQ_NAME_USR = "sessUsrSeq";
 	
 	
 	

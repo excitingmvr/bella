@@ -54,6 +54,7 @@ public class MajorCommentController extends BaseController{
 		return "usr/v1/mallbicycle/major/majorCommentUsrLita";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "majorCommentUsrUele")
 	public Map<String, Object> majorCommentUsrUele(MajorComment dto) throws Exception {
@@ -74,8 +75,6 @@ public class MajorCommentController extends BaseController{
 	@RequestMapping(value = "majorCommentUsrInst")
 	public Map<String, Object> majorCommentUsrInst(MajorComment dto) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		
-		System.out.println("asdasdf");
 		
 		int result = service.insertMajorComment(dto);
 

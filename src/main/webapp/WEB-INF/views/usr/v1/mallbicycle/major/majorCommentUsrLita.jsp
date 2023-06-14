@@ -14,7 +14,7 @@
 
 <c:forEach items="${list}" var="list" varStatus="status">
 	    
-        <div class="d-flex review-box border-top pt-4" id="<c:out value="${list.mbctSeq }"/>">
+        <div class="d-flex review-box border-top pt-4 mb-4" id="<c:out value="${list.mbctSeq }"/>">
             <div>
                 <div class="review-image">
                     <img class="img-fluid" src="/resources/usr/v1/image/infra/member/1000x1000.jpg" title="" alt="">
@@ -27,7 +27,7 @@
                     <a href="javascript:void(0);" onclick="ueleModalComment(<c:out value="${list.mbctSeq }"/>)"><i class="bi bi-trash3"></i></a>&nbsp;&nbsp;
                     <a href="javascript:void(0);" onclick="updateComment(<c:out value="${list.mbctSeq }"/>)"><i class="bi bi-pencil-square"></i></a>
                 </div>
-                <p class="m-0 pt-3" id="mbctComment_<c:out value="${status.index }"/>"><c:out value="${list.mbctComment }"/></p>
+                <p class="m-0 pt-3" id="mbctComment_<c:out value="${status.index }"/>"><c:out value="${fn:replace(list.mbctComment, br, '<br/>')}" escapeXml = "false"/></p>
             </div>
         </div>
 

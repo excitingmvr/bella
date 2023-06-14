@@ -761,7 +761,7 @@
 				/* ,dataType:"json" */
 				,url: "/v1/mallbicycle/majorcomment/majorCommentUsrInst"
 				/* ,data : $("#formList").serialize() */
-				,data : { "mbmtSeq": mbmtSeqJs, "mbctComment": $("#mbctComment").val() }
+				,data : { "mbmtSeq": mbmtSeqJs, "mbctComment": $("#mbctComment").val(), "ifmmSeq": sessUsrSeqJs  }
 				,success: function(response) {
 					setLitaComment();
 					$("#mbctComment").val("");
