@@ -850,7 +850,7 @@
 	
 	
 	updateComment = function(mbctSeqJs) {
-		
+		alert("asdasdf");
 	}
 	
 	
