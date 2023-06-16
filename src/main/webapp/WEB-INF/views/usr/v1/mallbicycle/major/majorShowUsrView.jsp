@@ -284,10 +284,14 @@
                                     </div>
                                 </div>                            
                                 
+<form name="formList" id="formList" method="post">
+	<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
+	<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
+	<input type="hidden" name="mbmtSeq">
                                 
 <div id="lita"></div>		<!-- #-> -->                                   
                                 
-                                
+</form>
                             </div>
                         </div>
                     </div>
@@ -789,6 +793,7 @@
 
 	function setLitaComment() {
 		var mbmtSeqJs = '<c:out value="${item.mbmtSeq}"/>';
+		$("input[name=mbmtSeq]").val(mbmtSeqJs);
 
 		$.ajax({
 			async: true 
@@ -796,12 +801,10 @@
 			,type: "post"
 			/* ,dataType:"json" */
 			,url: "/v1/mallbicycle/majorcomment/majorCommentUsrLita"
-			/* ,data : $("#formList").serialize() */
-			,data : { "mbmtSeq": mbmtSeqJs }
+			,data : $("#formList").serialize()
 			,success: function(response) {
 				$("#lita").empty();
 				$("#lita").append(response);
-// 				history.pushState({data: response}, null, goUrlAjaxList + '#page' + $("input:hidden[name=thisPage]").val());
 			}
 			,error : function(jqXHR, textStatus, errorThrown){
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -839,9 +842,19 @@
 	}
 
 	
+	goList = function(thisPage) {
+		$("input:hidden[name=thisPage]").val(thisPage);
+		
+		setLitaComment();
+	}
+	
+	
 	updateComment = function(mbctSeqJs) {
 		
 	}
+	
+	
+	
 </script>
 
 </body>

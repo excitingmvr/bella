@@ -9,6 +9,8 @@
 <!-- includeUsrTagCodeMajor e -->
 
 
+
+
 <div class="row">
     <div class="col-lg-12">
 
@@ -64,9 +66,9 @@
     </div>
 </div>
 
+
     
-                           
-</div>
+
 
 <!-- includeUsrModal s -->
 <%@include file="../../include/includeUsrModal.jsp"%>

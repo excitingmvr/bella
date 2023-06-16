@@ -42,7 +42,7 @@ public class MajorCommentController extends BaseController{
 //
 	@RequestMapping(value = "/majorCommentUsrLita")
 	public String majorCommentUsrLita(@ModelAttribute("vo") MajorCommentVo vo, HttpSession httpSession, Model model) throws Exception {
-		
+
 		setSearch(vo);
 		vo.setParamsPaging(service.selectOneCountMajorComment(vo));
 		
