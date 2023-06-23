@@ -20,9 +20,14 @@
 		<property name="username" value="sjmrdmin" />
 		<property name="password" value="Thwjsj11!!" />
 -->
+<!-- 
 		<property name="url" value="jdbc:log4jdbc:mariadb://training.cuwa75uqxtbd.ap-northeast-2.rds.amazonaws.com:33062/nct" />
 		<property name="username" value="jmapia" />
 		<property name="password" value="2z2nB1nary!!" />		
+ -->
+ 		<property name="url" value="jdbc:log4jdbc:mariadb://database-1.cbsrhj5vsfug.ap-northeast-2.rds.amazonaws.com:33066/nct" />
+		<property name="username" value="cdmin" />
+		<property name="password" value="xdmin0707" />
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
