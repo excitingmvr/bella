@@ -271,5 +271,13 @@ public class TestController extends BaseController {
 	        workbook.close();
 		}
     }
+	
+	@RequestMapping(value = "testInstagram")
+	public String testInstagram() throws Exception {
+		
+
+
+		return "test/testInstagram";
+	}
 
 }
