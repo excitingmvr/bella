@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
+<%@include file="../../include/head.jsp"%>
 
 <title>Member</title>		<!-- #-> -->
 
@@ -11,15 +11,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
+<%@include file="../../include/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
+<%@include file="../../include/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
+<%@include file="../../include/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -161,7 +161,7 @@
 <!-- search e -->
 
 <!-- totalAndRowNum s -->
-<%@include file="../../../common/xdmin/includeV1/totalAndRowNum.jsp"%>
+<%@include file="../../include/totalAndRowNum.jsp"%>
 <!-- totalAndRowNumu e -->
 
 <!-- table s -->
@@ -189,6 +189,15 @@
         <tbody>
 
 <c:set var="listCodeGender" value="${CodeServiceImpl.selectListCachedCode('3')}"/>
+
+
+<c:forEach items="${listCodeGender}" var="list" varStatus="status">
+	<c:out value="${list.ifcdName }"/>
+</c:forEach>
+
+<%-- <c:forEach items="${listCodeGender}" var="list" varStatus="status">
+	<c:out value="${list.ifcdName }"/>
+</c:forEach> --%>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -238,7 +247,7 @@
 <!-- table e -->
 
 <!-- pagination s -->
-<%@include file="../../../common/xdmin/includeV1/pagination.jsp"%>
+<%@include file="../../include/pagination.jsp"%>
 <!-- pagination e -->
 
 <!-- button s -->
@@ -265,15 +274,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
+<%@include file="../../include/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
+<%@include file="../../include/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
+<%@include file="../../include/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script>

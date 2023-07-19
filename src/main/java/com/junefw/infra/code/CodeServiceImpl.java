@@ -143,6 +143,11 @@ public class CodeServiceImpl implements CodeService{
 	}
 
 	
+	public static void clear() throws Exception {
+		Code.cachedCodeArrayList.clear();
+	}
+	
+	
 	public static List<Code> selectListCachedCode(String ifcgSeq) throws Exception {
 		List<Code> rt = new ArrayList<Code>();
 		for(Code codeRow : Code.cachedCodeArrayList) {
@@ -166,11 +171,6 @@ public class CodeServiceImpl implements CodeService{
 			}
 		}
 		return rt;
-	}
-	
-	
-	public static void clear() throws Exception {
-		Code.cachedCodeArrayList.clear();
 	}
 	
 }

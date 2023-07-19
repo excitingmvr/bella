@@ -78,8 +78,12 @@ public class MemberController extends BaseController {
 			List<Member> list = service.selectList(vo);
 //			List<?> list = service.selectList(vo);
 			model.addAttribute("list", list);
+			
+//			model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
+//			model.addAttribute("codeSocialLoigin", CodeServiceImpl.selectListCachedCode("16"));
 		}
-		return "infra/member/xdmin/memberList";
+//		return "infra/member/xdmin/memberList";
+		return pathXdmCommon + "memberXdmList";
 	}
 
 	
