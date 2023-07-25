@@ -292,10 +292,12 @@
 		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
 	
-	var goUrlList = "/member/memberList";					/* #-> */
-	var goUrlForm = "/member/memberForm";					/* #-> */
-	var goUrlMultiUele = "/member/memberMultiUele";			/* #-> */
-	var goUrlMultiDele = "/member/memberMultiDele";			/* #-> */
+	var urlCommon = "/v1/infra/member/";
+	
+	var goUrlList = urlCommon +  "memberXdmList";					/* #-> */
+	var goUrlForm = urlCommon +  "memberXdmForm";					/* #-> */
+	var goUrlMultiUele = urlCommon + "memberXdmMultiUele";			/* #-> */
+	var goUrlMultiDele = urlCommon + "memberXdmMultiDele";			/* #-> */
 	
 	var excelUri = "/member/excelDownload";					/* #-> */
 

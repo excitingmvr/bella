@@ -8,7 +8,7 @@
 
     <resultMap id="resultMapObj" type="com.junefw.infra.category.Category"></resultMap>
 	
-	<sql id ="selectCommon">
+	<sql id ="selectCommon">  
 		FROM 
 			infrCategory a
 		WHERE 1=1

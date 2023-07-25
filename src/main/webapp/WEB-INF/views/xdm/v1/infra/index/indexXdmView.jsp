@@ -28,7 +28,7 @@
 <a href="/v1/infra/codegroup/codeGroupXdmList"/>코드그룹관리</a><br>
 <a href="/v1/infra/code/codeXdmList"/>코드관리</a><br>
 <a href="/v1/infra/nationality/nationalityXdmAjaxList"/>국가관리</a><br>
-<a href="/v1/infra/member/memberList"/>회원관리</a><br>
+<a href="/v1/infra/member/memberXdmList"/>회원관리</a><br>
 <a href="/v1/location/location/locationXdmAjaxList"/>지역관리</a><br>
 
 

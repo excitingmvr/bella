@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!-- head s -->
-<%@include file="../../../common/xdmin/includeV1/head.jsp"%>
+<%@include file="../../include/head.jsp"%>
 <!-- head e -->
 
 <title>Member</title>		<!-- #-> -->
@@ -29,15 +29,15 @@
 <body>
 
 <!-- top s -->
-<%@include file="../../../common/xdmin/includeV1/top.jsp"%>
+<%@include file="../../include/top.jsp"%>
 <!-- top e -->
 
 <!-- gnb s -->
-<%@include file="../../../common/xdmin/includeV1/gnb.jsp"%>
+<%@include file="../../include/gnb.jsp"%>
 <!-- gnb e -->
 
 <!-- right menu s -->
-<%@include file="../../../common/xdmin/includeV1/right.jsp"%>
+<%@include file="../../include/right.jsp"%>
 <!-- right menu e -->
 
 <!-- contents s -->
@@ -116,7 +116,7 @@
 <!-- <form name="form" id="form" method="post" enctype="multipart/form-data"> -->
 <form id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data">
 <!-- *Vo.jsp s -->
-<%@include file="memberVo.jsp"%>		<!-- #-> -->
+<%@include file="memberXdmVo.jsp"%>		<!-- #-> -->
 <!-- *Vo.jsp e -->
 
 <h3 class="mt-3 mb-0">회원 관리</h3>		<!-- #-> -->
@@ -463,7 +463,7 @@
 
 <c:if test="${not empty item.ifmmSeq }">
 <!-- regMod s -->
-<%@include file="../../../common/xdmin/includeV1/regmod.jsp"%>
+<%@include file="../../include/regmod.jsp"%>
 <!-- regMod e -->
 </c:if>
 </div>
@@ -488,7 +488,7 @@
 </form>
 <form name="formVo" id="formVo" method="post">
 <!-- *Vo.jsp s -->
-<%@include file="memberVo.jsp"%>
+<%@include file="memberXdmVo.jsp"%>
 <!-- *Vo.jsp e -->
 </form>
 <!-- main e -->
@@ -499,15 +499,15 @@
 <!-- contents e -->
 
 <!-- footer s -->
-<%@include file="../../../common/xdmin/includeV1/footer.jsp"%>
+<%@include file="../../include/footer.jsp"%>
 <!-- footer e -->
 
 <!-- modalBase s -->
-<%@include file="../../../common/xdmin/includeV1/modalBase.jsp"%>
+<%@include file="../../include/modalBase.jsp"%>
 <!-- modalBase e -->
 
 <!-- linkJs s -->
-<%@include file="../../../common/xdmin/includeV1/linkJs.jsp"%>
+<%@include file="../../include/linkJs.jsp"%>
 <!-- linkJs e -->
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -521,12 +521,13 @@
 		 $("#addressOthers").hide();
 	}); 
 
-
-	var goUrlList = "/member/memberList"; 			/* #-> */
-	var goUrlInst = "/member/memberInst"; 			/* #-> */
-	var goUrlUpdt = "/member/memberUpdt";			/* #-> */
-	var goUrlUele = "/member/memberUele";			/* #-> */
-	var goUrlDele = "/member/memberDele";			/* #-> */
+	var urlCommon = "/v1/infra/member/";					/* #-> */
+	
+	var goUrlList = urlCommon + "memberXdmList"; 			/* #-> */
+	var goUrlInst = urlCommon + "memberXdmInst"; 			/* #-> */
+	var goUrlUpdt = urlCommon + "memberXdmUpdt";			/* #-> */
+	var goUrlUele = urlCommon + "memberXdmUele";			/* #-> */
+	var goUrlDele = urlCommon + "memberXdmDele";			/* #-> */
 	
 	var seq = $("input:hidden[name=ifmmSeq]"); 		/* #-> */
 	

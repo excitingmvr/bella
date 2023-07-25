@@ -68,7 +68,7 @@ public class MemberController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = "memberList")
+	@RequestMapping(value = "memberXdmList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
 		setSearch(vo);
@@ -87,7 +87,7 @@ public class MemberController extends BaseController {
 	}
 
 	
-	@RequestMapping(value = "memberForm")
+	@RequestMapping(value = "memberXdmForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model, NationalityVo nationalityVo) throws Exception {
 		
 		nationalityVo.setShUseNy(1);
@@ -109,7 +109,7 @@ public class MemberController extends BaseController {
 //		model.addAttribute("codeGender", CodeServiceImpl.selectListCachedCode("3"));
 //		model.addAttribute("codeTelecom", CodeServiceImpl.selectListCachedCode("10"));
 
-		return "infra/member/xdmin/memberForm";
+		return pathXdmCommon + "memberXdmForm";
 	}
 
 	
