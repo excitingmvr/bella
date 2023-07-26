@@ -132,7 +132,7 @@ public class MemberController extends BaseController {
 	
 	
 	@SuppressWarnings(value = { "all" })
-	@RequestMapping(value = "memberUpdt")
+	@RequestMapping(value = "memberXdmUpdt")
 	public String memberUpdt(MemberVo vo, Member dto, RedirectAttributes redirectAttributes) throws Exception {
 
 		service.update(dto);
@@ -140,9 +140,9 @@ public class MemberController extends BaseController {
 		redirectAttributes.addFlashAttribute("vo", vo);
 
 		if (Constants.UPDATE_AFTER_TYPE == 1) {
-			return "redirect:/member/memberForm";
+			return pathRedirectCommon + "memberXdmForm";
 		} else {
-			return "redirect:/member/memberList";
+			return pathRedirectCommon + "memberXdmList";
 		}
 	}
 	

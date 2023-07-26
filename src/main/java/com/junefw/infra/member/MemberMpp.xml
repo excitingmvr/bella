@@ -175,7 +175,7 @@
 			,#{ifmmNickname}
 			,#{ifmmGenderCd}
 			<choose>
-				<when test="ifmmDob.equals('')">,NULL</when>
+				<when test="ifmmDob.equals('')">,NULL</when>  
 				<otherwise>,#{ifmmDob}</otherwise>
 			</choose>
 			,#{ifmmSavedCd}
@@ -220,13 +220,13 @@
 			,ifmmEmailConsentNy = #{ifmmEmailConsentNy}
 			,ifmmSmsConsentNy = #{ifmmSmsConsentNy}
 			,ifmmPushConsentNy = #{ifmmPushConsentNy}
-			,ifmmCountryResidence = #{ifmmCountryResidence}
+<!--  -->
 			,ifmmDesc = #{ifmmDesc}
 			<include refid="Base.updateModColumnValue" />
 		WHERE 1=1
 			AND ifmmSeq = #{ifmmSeq}
 	</update>
-	
+				<!-- ,ifmmCountryResidence = #{ifmmCountryResidence} -->
 	
 	<update id="uelete">
 		UPDATE infrMember

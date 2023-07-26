@@ -425,7 +425,13 @@
         	<input type="hidden" id="<c:out value="${name }"/>DeleteSeq" name="<c:out value="${name }"/>DeleteSeq"/>
         	<input type="hidden" id="<c:out value="${name }"/>DeletePathFile" name="<c:out value="${name }"/>DeletePathFile"/>
             <label for="uploadImg" class="form-label input-file-button">이미지첨부</label>
- 			<input class="form-control form-control-sm" id="<c:out value="${name }"/>" name="<c:out value="${name }"/>" type="file" multiple="multiple" style="display: none;" onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 1, 0, 0, 1);">
+ 			<input class="form-control form-control-sm" 
+ 					id="<c:out value="${name }"/>" 
+ 					name="<c:out value="${name }"/>" 
+ 					type="file" 
+ 					multiple="multiple" 
+ 					style="display: none;" 
+ 					onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 1, 0, 0, 1);">
 			<div id="<c:out value="${name }"/>Preview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
@@ -792,9 +798,18 @@
 			var tagIds = document.querySelectorAll("#" + objName + "Preview > div");
 			
 			for(var i=0; i<tagIds.length; i++){
+				alert(i);
 				var tagId = tagIds[i].getAttribute("id").split("_");
 				numbering.push(tagId[2]);
 			}
+			
+			alert(numbering.length);
+			
+			for(let i=0; i < numbering.length; i++){
+// 				alert(i);
+			}
+			
+			
 			
 			if(uploadedFilesCount > 0){
 				numbering.sort();
