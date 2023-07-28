@@ -431,7 +431,8 @@
  					type="file" 
  					multiple="multiple" 
  					style="display: none;" 
- 					onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 1, 0, 0, 1);">
+ 					<%-- onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 0, 1, 0, 0, 1);" --%>
+ 					>
 			<div id="<c:out value="${name }"/>Preview" class="addScroll">
 				<c:forEach items="${listUploaded}" var="listUploaded" varStatus="statusUploaded">
 					<c:if test="${listUploaded.type eq type }">
