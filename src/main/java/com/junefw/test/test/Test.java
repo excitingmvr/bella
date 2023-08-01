@@ -14,7 +14,7 @@ public class Test extends Base {
 	private Integer ifnaOrder;
 	private String ifnaDesc;
 	private Integer ifnaDelNy;
-	//	----------
+//	----------
 	public String getIfnaSeq() {
 		return ifnaSeq;
 	}
@@ -75,5 +75,6 @@ public class Test extends Base {
 	public void setIfnaDelNy(Integer ifnaDelNy) {
 		this.ifnaDelNy = ifnaDelNy;
 	}
+	
 
 }

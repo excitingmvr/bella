@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<%@include file="../common/xdmin/includeV1/head.jsp"%>
+<%@include file="../xdm/v1/include/head.jsp"%>
 
 </head>
 <body>
@@ -13,7 +13,15 @@ publicCorona1List
 <br>aaa : <c:out value="${numOfRows }"/>
 <br>aaa : <c:out value="${items }"/>
 <br>aaa : <c:out value="${fn:length(items) }"/>
-
+<hr>
+<br>bbb : <c:out value="${header.resultCode }"/>
+<br>bbb : <c:out value="${header.resultMsg }"/>
+<br>bbb : <c:out value="${header.pageNo }"/>
+<br>bbb : <c:out value="${header.totalCount }"/>
+<br>bbb : <c:out value="${header.numOfRows }"/>
+<br>bbb : <c:out value="${header.items }"/>
+<br>bbb : <c:out value="${fn:length(header.items) }"/>
+<hr>
 <c:forEach items="${items}" var="item" varStatus="status">
 	<c:out value="${item.YYYY }"/>
 	<br><c:out value="${item.MM }"/>	
