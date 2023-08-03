@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,8 +45,9 @@ public class MemberRestController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = "/{seq}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
 //	@PatchMapping("/{seq}")
+//	@PutMapping("/{seq}")
 	public void update(@PathVariable String seq, @RequestBody Member dto) throws Exception {
 		dto.setIfmmSeq(seq);
 		service.update(dto);
