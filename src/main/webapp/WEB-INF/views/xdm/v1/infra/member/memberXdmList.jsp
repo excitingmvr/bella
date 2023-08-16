@@ -195,6 +195,11 @@
 	<c:out value="${list.ifcdName }"/>
 </c:forEach>
 
+<%-- 
+<c:forEach var="i" begin="1" end="${} " step="1">
+...CODE...
+</c:forEach>
+ --%>
 <%-- <c:forEach items="${listCodeGender}" var="list" varStatus="status">
 	<c:out value="${list.ifcdName }"/>
 </c:forEach> --%>
@@ -287,10 +292,26 @@
 
 <script>
 
+
+
 	$(document).ready(function(){
 		divSearchControl();
 		 $("#shDateStart, #shDateEnd").datepicker();
 	}); 
+	
+	
+// 	var aa = new Array();
+	var list = new Array();
+	 <c:forEach items="${listCodeGender}" var="list" varStatus="status">
+		list.push({
+			seq: "${list.ifcdSeq}"
+			,name: "${list.ifcdName}"
+		});	
+	</c:forEach>
+	
+	for(let i=0; i<list.length; i++){
+		alert(list[i].seq + " : " + list[i].name);
+	}
 	
 	var urlCommon = "/v1/infra/member/";
 	

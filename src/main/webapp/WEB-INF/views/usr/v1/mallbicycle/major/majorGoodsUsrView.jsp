@@ -240,7 +240,8 @@
 			<h4 class="h4"><c:out value="${item.mbmgTitle }"/></h4>
 		</div>                               
 		<div class="product-description" style="padding-top: 10px;">
-			<p><c:out value="${item.mbmgDesc }"/></p>
+			<p><c:out value="${fn:replace(item.mbmgDesc, br, '<br/>')}" escapeXml = "false"/> 111</p>
+			<%-- <p><c:out value="${item.mbmgDesc }"/></p> --%>
 		</div> 
 		<div class="product-meta small">
 			<fmt:formatDate value="${item.modDateTime }" pattern="yyyy-MM-dd HH:mm:ss"/>

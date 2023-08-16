@@ -39,7 +39,11 @@ public class MemberRestController extends BaseController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 //	@PostMapping("")
-	public String insert(@RequestBody Member dto) throws Exception {
+	public String insert(Member dto) throws Exception {
+		
+		System.out.println("dto.getIfmmId(): " + dto.getIfmmId());
+		System.out.println("dto.getIfmmName(): " + dto.getIfmmName());
+		
 		service.insert(dto);
 		return dto.getIfmmSeq();
 	}
@@ -48,7 +52,13 @@ public class MemberRestController extends BaseController {
 	@RequestMapping(value = "/{seq}", method = RequestMethod.PUT)
 //	@PatchMapping("/{seq}")
 //	@PutMapping("/{seq}")
-	public void update(@PathVariable String seq, @RequestBody Member dto) throws Exception {
+	public void update(@PathVariable String seq, Member dto) throws Exception {
+		
+		
+		System.out.println("seq: " + seq);
+		System.out.println("dto.getIfmmId(): " + dto.getIfmmId());
+		System.out.println("dto.getIfmmName(): " + dto.getIfmmName());
+		
 		dto.setIfmmSeq(seq);
 		service.update(dto);
 	}
